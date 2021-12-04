@@ -3,12 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/zoomt/AndroidStudioProjects/CS402-Final/app/src/main/res/layout/activity_main.xml" value="0.13020833333333334" />
-        <entry key="..\:/Users/zoomt/AndroidStudioProjects/CS402-Final/app/src/main/res/layout/activity_scan.xml" value="0.17300724637681159" />
+        <entry key="..\:/Users/macel/AndroidStudioProjects/CS402Final/app/src/main/res/layout/activity_item_search.xml" value="0.264" />
+        <entry key="..\:/Users/macel/AndroidStudioProjects/CS402Final/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/macel/AndroidStudioProjects/CS402Final/app/src/main/res/layout/activity_search_screen.xml" value="0.2" />
+        <entry key="..\:/Users/macel/AndroidStudioProjects/CS402Final/app/src/main/res/layout/content_search_screen.xml" value="0.13020833333333334" />
+        <entry key="..\:/Users/macel/AndroidStudioProjects/CS402Final/app/src/main/res/layout/fragment_first.xml" value="0.13020833333333334" />
+        <entry key="..\:/Users/macel/AndroidStudioProjects/CS402Final/app/src/main/res/layout/fragment_search_results.xml" value="0.2" />
+        <entry key="..\:/Users/macel/AndroidStudioProjects/CS402Final/app/src/main/res/layout/fragment_second.xml" value="0.2" />
+        <entry key="..\:/Users/macel/AndroidStudioProjects/CS402Final/app/src/main/res/layout/search_item_view.xml" value="0.13020833333333334" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

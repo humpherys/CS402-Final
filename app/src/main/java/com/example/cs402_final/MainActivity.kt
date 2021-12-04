@@ -11,12 +11,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+        val searchButton = findViewById<Button>(R.id.button)
+
+        searchButton.setOnClickListener {
+            val intent = Intent(this@MainActivity, ItemSearch::class.java)
+            startActivity(intent)
+        }
+
         //Code for Scanning the UPC Button
-        val butto = findViewById<Button>(R.id.ScanUPCButton)
+        val butto = findViewById<Button>(R.id.button2)
         butto.setOnClickListener{
             val scanIntent = Intent(this,ScanActivity::class.java)
             startActivity(scanIntent)
         }
+
     }
 
 

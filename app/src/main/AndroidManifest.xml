@@ -21,6 +21,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CS402Final">
         <activity
+            android:name=".ItemSearch"
+            android:exported="false" />
+      
+        <activity
             android:name=".ScanActivity"
             android:exported="false" />
 
