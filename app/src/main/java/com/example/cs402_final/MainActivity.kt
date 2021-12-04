@@ -28,7 +28,6 @@ class MainActivity : AppCompatActivity() {
             val scanIntent = Intent(this,ScanActivity::class.java)
             startActivity(scanIntent)
         }
-
     }
 
 }
