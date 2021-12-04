@@ -8,7 +8,9 @@
         <entry key="..\:/Users/macel/AndroidStudioProjects/CS402Final/app/src/main/res/layout/activity_search_screen.xml" value="0.2" />
         <entry key="..\:/Users/macel/AndroidStudioProjects/CS402Final/app/src/main/res/layout/content_search_screen.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/macel/AndroidStudioProjects/CS402Final/app/src/main/res/layout/fragment_first.xml" value="0.13020833333333334" />
+        <entry key="..\:/Users/macel/AndroidStudioProjects/CS402Final/app/src/main/res/layout/fragment_search_results.xml" value="0.2" />
         <entry key="..\:/Users/macel/AndroidStudioProjects/CS402Final/app/src/main/res/layout/fragment_second.xml" value="0.2" />
+        <entry key="..\:/Users/macel/AndroidStudioProjects/CS402Final/app/src/main/res/layout/search_item_view.xml" value="0.13020833333333334" />
       </map>
     </option>
   </component>
