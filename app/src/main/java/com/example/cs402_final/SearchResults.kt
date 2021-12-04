@@ -24,7 +24,7 @@ class SearchResults : Fragment() {
     private var param2: String? = null
 
     private lateinit var searchRecyclerView: RecyclerView
-    private lateinit var resultList : ArrayList<String>
+    private lateinit var resultList : ArrayList<ItemData>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +47,7 @@ class SearchResults : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         searchRecyclerView = view.findViewById<RecyclerView>(R.id.search_recycler_view)
         searchRecyclerView.layoutManager = LinearLayoutManager(this.context)
-        resultList = arrayListOf<String>("Arabic", "Robusta", "Sumatra", "Kona")
+        resultList = arrayListOf<ItemData>(ItemData("Arabic"),ItemData("Robusta"), ItemData("Sumatra"), ItemData("Kona"))
 
         this.context.let {
             val searchAdapter: SearchAdapter  = SearchAdapter(it!!, resultList)
