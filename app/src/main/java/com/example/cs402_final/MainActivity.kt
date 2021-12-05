@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         val searchButton = findViewById<Button>(R.id.button)
 
         searchButton.setOnClickListener {
-            val intent = Intent(this@MainActivity, ItemSearch::class.java)
+            val intent = Intent(this@MainActivity, ItemSearchActivity::class.java)
             startActivity(intent)
         }
 
@@ -24,6 +24,16 @@ class MainActivity : AppCompatActivity() {
         butto.setOnClickListener{
             val scanIntent = Intent(this,ScanActivity::class.java)
             startActivity(scanIntent)
+        }
+
+        val addButton = findViewById<Button>(R.id.button5)
+        addButton.setOnClickListener {
+            val addIntent = Intent(this, ItemActivity::class.java)
+
+            //This is for testing intent passing, should be removed eventually
+//            val testItem = ItemData(1, "abc","Test Item Name", 9.99,5.00,20)
+//            addIntent.putExtra("item", testItem)
+            startActivity(addIntent)
         }
 
     }

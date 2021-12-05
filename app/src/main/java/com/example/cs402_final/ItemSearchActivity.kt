@@ -6,7 +6,7 @@ import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import com.google.android.material.textfield.TextInputEditText
 
-class ItemSearch : AppCompatActivity() {
+class ItemSearchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_search)
