@@ -31,8 +31,8 @@ class MainActivity : AppCompatActivity() {
             val addIntent = Intent(this, ItemActivity::class.java)
 
             //This is for testing intent passing, should be removed eventually
-            val testItem = ItemData(1, "abc","Test Item Name", 9.99,5.00,20)
-            addIntent.putExtra("item", testItem)
+//            val testItem = ItemData(1, "abc","Test Item Name", 9.99,5.00,20)
+//            addIntent.putExtra("item", testItem)
             startActivity(addIntent)
         }
 
