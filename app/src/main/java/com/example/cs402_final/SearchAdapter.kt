@@ -1,11 +1,13 @@
 package com.example.cs402_final
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 
 public class SearchAdapter(context: Context, var results: ArrayList<ItemData>)
@@ -23,7 +25,13 @@ public class SearchAdapter(context: Context, var results: ArrayList<ItemData>)
         val item = results[position]
         holder.apply {
             titleTextView.text = item.name
+            titleTextView.setOnClickListener {
+                val addIntent = Intent(itemView.context, ItemActivity::class.java)
+                addIntent.putExtra("item", item)
+                startActivity(itemView.context, addIntent, null)
+            }
         }
+
     }
 
     class ResultsHolder(view: View) : RecyclerView.ViewHolder(view) {
