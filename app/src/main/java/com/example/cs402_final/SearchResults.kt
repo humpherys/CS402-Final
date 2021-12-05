@@ -47,7 +47,10 @@ class SearchResults : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         searchRecyclerView = view.findViewById<RecyclerView>(R.id.search_recycler_view)
         searchRecyclerView.layoutManager = LinearLayoutManager(this.context)
-        resultList = arrayListOf<ItemData>(ItemData("Arabic"),ItemData("Robusta"), ItemData("Sumatra"), ItemData("Kona"))
+        resultList = arrayListOf<ItemData>(ItemData(1, "abc","Test Item 1", 9.99,5.00,20),
+            ItemData(2, "abc","Test Item 2", 9.99,5.00,20),
+            ItemData(3, "abc","Test Item 3", 9.99,5.00,20),
+            ItemData(4, "abc","Test Item 4", 9.99,5.00,20))
 
         this.context.let {
             val searchAdapter: SearchAdapter  = SearchAdapter(it!!, resultList)
