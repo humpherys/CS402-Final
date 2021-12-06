@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
             val scanIntent = Intent(this,ScanActivity::class.java)
             startActivity(scanIntent)
         }
-        
+
         val addButton = findViewById<Button>(R.id.button5)
         addButton.setOnClickListener {
             val addIntent = Intent(this, ItemActivity::class.java)
