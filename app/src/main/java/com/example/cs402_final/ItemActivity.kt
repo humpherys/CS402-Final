@@ -11,6 +11,16 @@ class ItemActivity : AppCompatActivity() {
 
     private var displayedItem: ItemData? = null
 
+    private var newName: String? = null
+    private var newDescription: String? = null
+    private var newCode: String? = null
+    private var newPrice: Double = 0.0
+    private var newCost: Double = 0.0
+    private var newQuantity: Int = 0
+    private var newVendor: String? = null
+    private var newShelf: String? = null
+    private var newUPC: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item)
@@ -29,18 +39,24 @@ class ItemActivity : AppCompatActivity() {
         itemNameContainer.doOnTextChanged { text, start, before, count ->
             displayedItem?.let {
                 it.name = text.toString()
+            } ?: run {
+                newName = text.toString()
             }
         }
 
         itemDescription.doOnTextChanged { text, start, before, count ->
             displayedItem?.let {
                 it.description = text.toString()
+            } ?: run {
+                newDescription = text.toString()
             }
         }
 
         itemCode.doOnTextChanged { text, start, before, count ->
             displayedItem?.let {
                 it.code = text.toString()
+            } ?: run {
+                newCode = text.toString()
             }
         }
 
@@ -48,6 +64,9 @@ class ItemActivity : AppCompatActivity() {
             displayedItem?.let {
                 val parsedPrice = String.format("%.2f", text.toString().toDouble())
                 it.price = parsedPrice.toDouble()
+            } ?: run {
+                val parsedPrice = String.format("%.2f", text.toString().toDouble())
+                newPrice = parsedPrice.toDouble()
             }
         }
 
@@ -55,30 +74,41 @@ class ItemActivity : AppCompatActivity() {
             displayedItem?.let {
                 val parsedPrice = String.format("%.2f", text.toString().toDouble())
                 it.cost = parsedPrice.toDouble()
+            } ?: run {
+                val parsedPrice = String.format("%.2f", text.toString().toDouble())
+                newCost = parsedPrice.toDouble()
             }
         }
 
         itemQuantity.doOnTextChanged { text, start, before, count ->
             displayedItem?.let {
                 it.qty = text.toString().toInt()
+            } ?: run {
+                newQuantity = text.toString().toInt()
             }
         }
 
         itemVendor.doOnTextChanged { text, start, before, count ->
             displayedItem?.let {
                 it.vendor = text.toString()
+            } ?: run {
+                newCode = text.toString()
             }
         }
 
         itemShelf.doOnTextChanged { text, start, before, count ->
             displayedItem?.let {
                 it.shelf = text.toString()
+            } ?: run {
+                newCode = text.toString()
             }
         }
 
         itemUPC.doOnTextChanged { text, start, before, count ->
             displayedItem?.let {
                 it.upc = text.toString()
+            } ?: run {
+                newCode = text.toString()
             }
         }
 
