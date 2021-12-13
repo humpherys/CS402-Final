@@ -38,6 +38,13 @@ class MainActivity : AppCompatActivity() {
 //            addIntent.putExtra("item", testItem)
             startActivity(addIntent)
         }
+
+        val tagButton = findViewById<Button>(R.id.button3)
+        tagButton.setOnClickListener {
+            val tagIntent = Intent(this, TagActivity::class.java)
+            startActivity(tagIntent)
+        }
+
     }
 
 }
