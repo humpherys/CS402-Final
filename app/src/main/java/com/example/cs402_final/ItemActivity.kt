@@ -92,7 +92,7 @@ class ItemActivity : AppCompatActivity() {
             displayedItem?.let {
                 it.vendor = text.toString()
             } ?: run {
-                newCode = text.toString()
+                newVendor = text.toString()
             }
         }
 
@@ -100,7 +100,7 @@ class ItemActivity : AppCompatActivity() {
             displayedItem?.let {
                 it.shelf = text.toString()
             } ?: run {
-                newCode = text.toString()
+                newShelf = text.toString()
             }
         }
 
@@ -108,7 +108,7 @@ class ItemActivity : AppCompatActivity() {
             displayedItem?.let {
                 it.upc = text.toString()
             } ?: run {
-                newCode = text.toString()
+                newUPC = text.toString()
             }
         }
 
