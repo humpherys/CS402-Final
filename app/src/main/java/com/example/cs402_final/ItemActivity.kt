@@ -1,8 +1,11 @@
 package com.example.cs402_final
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
+import android.widget.Button
 import androidx.core.widget.doOnTextChanged
 import com.google.android.material.textfield.TextInputEditText
 
@@ -10,6 +13,7 @@ import com.google.android.material.textfield.TextInputEditText
 class ItemActivity : AppCompatActivity() {
 
     private var displayedItem: ItemData? = null
+    private lateinit var startedFrom: String
 
     private var newName: String? = null
     private var newDescription: String? = null
@@ -25,6 +29,7 @@ class ItemActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item)
         val extras = intent.extras
+        startedFrom = extras?.getString("origin") ?: ""
 
         val itemNameContainer = findViewById<TextInputEditText>(R.id.ItemName)
         val itemDescription = findViewById<TextInputEditText>(R.id.ItemDescription)
@@ -35,6 +40,8 @@ class ItemActivity : AppCompatActivity() {
         val itemVendor = findViewById<TextInputEditText>(R.id.ItemVendor)
         val itemShelf = findViewById<TextInputEditText>(R.id.ItemShelf)
         val itemUPC = findViewById<TextInputEditText>(R.id.ItemUPC)
+
+        val saveButton = findViewById<Button>(R.id.SaveButton)
 
         itemNameContainer.doOnTextChanged { text, start, before, count ->
             displayedItem?.let {
@@ -111,6 +118,41 @@ class ItemActivity : AppCompatActivity() {
                 newUPC = text.toString()
             }
         }
+
+        saveButton.setOnClickListener {
+            if(startedFrom.equals("search")) {
+                //TODO: do something here to save data from the existing item to storage
+                //TODO: Also need to figure out how to properly update the search list on return
+                    //or maybe just clear the search?
+                finish()
+            } else if(startedFrom.equals("main") || startedFrom.equals("")) {
+                if(newCode == null || newName == null) {
+                    val builder = AlertDialog.Builder(this)
+                    builder.setTitle("Cannot save!")
+                    builder.setMessage("Item name and item code must be set before saving!")
+                    builder.setPositiveButton("Okay", null)
+                    builder.show();
+                } else {
+                    //TODO: We need a way to choose what the new id will be
+                    // Maybe it will just be auto set to something different when inserted into db
+                    var id = 0
+                    var newItem = ItemData(id,
+                        newCode!!,
+                        newName!!,
+                        newPrice,
+                        newCost,
+                        newQuantity,
+                        newVendor,
+                        newDescription,
+                        newShelf,
+                        newUPC)
+
+                    //TODO: do something to save the new item to storage
+                    finish()
+                }
+            }
+        }
+
 
         //If we ever need a listener for the Next key, this works as a template
         //It's how I handled text updates until I found out about doOnTextChanged
