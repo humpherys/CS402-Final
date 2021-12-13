@@ -4,6 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,9 +38,6 @@ class MainActivity : AppCompatActivity() {
 //            addIntent.putExtra("item", testItem)
             startActivity(addIntent)
         }
-
     }
-
-
 
 }

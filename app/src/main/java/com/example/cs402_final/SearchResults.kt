@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -26,6 +28,9 @@ class SearchResults : Fragment() {
     private lateinit var searchRecyclerView: RecyclerView
     private lateinit var resultList : ArrayList<ItemData>
 
+    // add our ItemModel
+    private lateinit var mItemModel: ItemModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -40,6 +45,10 @@ class SearchResults : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        //val view = inflater.inflate(R.layout.fragment_search_results, container, false)
+
+
+        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_search_results, container, false)
     }
 
@@ -51,11 +60,21 @@ class SearchResults : Fragment() {
             ItemData(2, "abc","Test Item 2", 9.99,5.00,20),
             ItemData(3, "abc","Test Item 3", 9.99,5.00,20),
             ItemData(4, "abc","Test Item 4", 9.99,5.00,20))
-
+//
         this.context.let {
+//            val searchAdapter: SearchAdapter = SearchAdapter()
+            //resultList = emptyList()
             val searchAdapter: SearchAdapter  = SearchAdapter(it!!, resultList)
             searchRecyclerView.adapter = searchAdapter;
+
+            // Set up item model
+//            mItemModel = ViewModelProvider(this).get(ItemModel::class.java)
+//            mItemModel.readAllData.observe(this, Observer { item ->
+//                searchAdapter.setData(item)
+//            })
         }
+
+
     }
 
     companion object {
