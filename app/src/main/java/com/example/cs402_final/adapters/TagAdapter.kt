@@ -9,13 +9,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.cs402_final.R
 
 //TODO: We will probably need more info in the tag data eventually, but idk what the db structure is
-data class TagData(var tagName: String)
+data class TagData(
+    var tagName: String,
+    var selected: Boolean? = null
+)
 
-public class TagAdapter(context: Context, private var tagList: ArrayList<TagData> ) : RecyclerView.Adapter<TagAdapter.TagHolder>() {
+public class TagAdapter(context: Context, private var tagList: ArrayList<TagData>) :
+    RecyclerView.Adapter<TagAdapter.TagHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
             : TagHolder {
-        val view = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_item_view, parent, false)
+        val view = LayoutInflater.from(parent.getContext())
+            .inflate(R.layout.view_search_item, parent, false)
         return TagHolder(view)
     }
 

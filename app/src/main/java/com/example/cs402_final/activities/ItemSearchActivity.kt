@@ -14,8 +14,11 @@ class ItemSearchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_search)
+
+        val extras = intent.extras
         if (savedInstanceState == null) {
             supportFragmentManager.commit {
+                val action = extras?.getString("action")
                 var resultList = arrayListOf<ItemData>(
                     ItemData(1, "abc","Test Item 1", 9.99,5.00,20),
                     ItemData(2, "abc","Test Item 2", 9.99,5.00,20),
@@ -23,7 +26,7 @@ class ItemSearchActivity : AppCompatActivity() {
                     ItemData(4, "abc","Test Item 4", 9.99,5.00,20)
                 )
                 val bundle = bundleOf(
-                    "fragType" to "search",
+                    "fragType" to (action ?: "search"),
                     "results" to resultList
                 )
                 setReorderingAllowed(true)

@@ -30,7 +30,8 @@ data class ItemData(var id: Int,
                     var vendor: String? = null,
                     var description: String? = null,
                     var shelf: String? = null,
-                    var upc: String? = null
+                    var upc: String? = null,
+                    var selected: Boolean? = null
 ) : Parcelable
 
 class ItemModel(application: Application): AndroidViewModel(application) {
