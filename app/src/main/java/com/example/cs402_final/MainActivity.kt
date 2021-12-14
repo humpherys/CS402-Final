@@ -4,11 +4,22 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import androidx.activity.viewModels
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
 class MainActivity : AppCompatActivity() {
+
+//    val db = Room.databaseBuilder(
+//        applicationContext,
+//        ItemDatabase::class.java, "items_database"
+//    ).build()
+
+    private val newItemActivityRequestCode = 1
+    private val itemViewModel : ItemViewModel by viewModels {
+        ItemViewModelFactory((application as ItemsApplication).repository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

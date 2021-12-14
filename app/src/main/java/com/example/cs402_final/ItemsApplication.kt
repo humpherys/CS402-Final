@@ -7,7 +7,7 @@ import kotlinx.coroutines.SupervisorJob
 class ItemsApplication : Application() {
 
     // Will be torn down with process
-    val applicationScope = CoroutineScope(SupervisorJob())
+    private val applicationScope = CoroutineScope(SupervisorJob())
 
 
     // Using by lazy so the database and repository are only created when theyre needed

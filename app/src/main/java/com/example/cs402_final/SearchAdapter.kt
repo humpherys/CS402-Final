@@ -20,6 +20,7 @@ public class SearchAdapter(context: Context, var results: ArrayList<Item>)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
             : SearchAdapter.ResultsHolder {
         val view = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_item_view, parent, false)
+
         return ResultsHolder(view)
     }
 
@@ -45,8 +46,8 @@ public class SearchAdapter(context: Context, var results: ArrayList<Item>)
         val titleTextView: TextView = view.findViewById(R.id.item_name)
     }
 //
-//    fun setData(item: List<Item>){
-//        this.results = item
-//        notifyDataSetChanged()
-//    }
+    fun setData(item: ArrayList<Item>){
+        this.results = item
+        notifyDataSetChanged()
+    }
 }

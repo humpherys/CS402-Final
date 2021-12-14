@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
+import androidx.activity.viewModels
 import androidx.core.widget.doOnTextChanged
 import com.google.android.material.textfield.TextInputEditText
 
@@ -14,6 +15,7 @@ class ItemActivity : AppCompatActivity() {
 
     private var displayedItem: ItemData? = null
     private lateinit var startedFrom: String
+    private var displayedDBItem: Item? = null
 
     private var newName: String? = null
     private var newDescription: String? = null
@@ -28,6 +30,11 @@ class ItemActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item)
+
+        val itemViewModel: ItemViewModel by viewModels {
+            ItemViewModelFactory((application as ItemsApplication).repository)
+        }
+
         val extras = intent.extras
         startedFrom = extras?.getString("origin") ?: ""
 
@@ -119,10 +126,88 @@ class ItemActivity : AppCompatActivity() {
             }
         }
 
+        // ------------------------------- Masons Above, Jacob Below, Jacob is for DB
+
+        itemNameContainer.doOnTextChanged { text, start, before, count ->
+            displayedDBItem?.let {
+                it.itemName = text.toString()
+            } ?: run {
+                newName = text.toString()
+            }
+        }
+
+        itemDescription.doOnTextChanged { text, start, before, count ->
+            displayedDBItem?.let {
+                it.itemDesc = text.toString()
+            } ?: run {
+                newDescription = text.toString()
+            }
+        }
+
+        itemCode.doOnTextChanged { text, start, before, count ->
+            displayedDBItem?.let {
+                it.itemCode = text.toString()
+            } ?: run {
+                newCode = text.toString()
+            }
+        }
+
+        itemPrice.doOnTextChanged { text, start, before, count ->
+            displayedDBItem?.let {
+                val parsedPrice = String.format("%.2f", text.toString().toDouble())
+                it.itemPrice = parsedPrice.toDouble()
+            } ?: run {
+                val parsedPrice = String.format("%.2f", text.toString().toDouble())
+                newPrice = parsedPrice.toDouble()
+            }
+        }
+
+        itemCost.doOnTextChanged { text, start, before, count ->
+            displayedDBItem?.let {
+                val parsedPrice = String.format("%.2f", text.toString().toDouble())
+                it.itemCost = parsedPrice.toDouble()
+            } ?: run {
+                val parsedPrice = String.format("%.2f", text.toString().toDouble())
+                newCost = parsedPrice.toDouble()
+            }
+        }
+
+        itemQuantity.doOnTextChanged { text, start, before, count ->
+            displayedDBItem?.let {
+                it.itemQty = text.toString().toInt()
+            } ?: run {
+                newQuantity = text.toString().toInt()
+            }
+        }
+
+        itemVendor.doOnTextChanged { text, start, before, count ->
+            displayedDBItem?.let {
+                it.itemVendorCode = text.toString()
+            } ?: run {
+                newVendor = text.toString()
+            }
+        }
+
+        itemShelf.doOnTextChanged { text, start, before, count ->
+            displayedDBItem?.let {
+                it.itemLoc = text.toString()
+            } ?: run {
+                newShelf = text.toString()
+            }
+        }
+
+        itemUPC.doOnTextChanged { text, start, before, count ->
+            displayedDBItem?.let {
+                it.itemUPC = text.toString()
+            } ?: run {
+                newUPC = text.toString()
+            }
+        }
+
         saveButton.setOnClickListener {
             if(startedFrom.equals("search")) {
                 //TODO: do something here to save data from the existing item to storage
-                //TODO: Also need to figure out how to properly update the search list on return
+                //TODO: Also need to figure out how to properly update the search list on return, Room should do this for us
                     //or maybe just clear the search?
                 finish()
             } else if(startedFrom.equals("main") || startedFrom.equals("")) {
@@ -136,7 +221,18 @@ class ItemActivity : AppCompatActivity() {
                     //TODO: We need a way to choose what the new id will be
                     // Maybe it will just be auto set to something different when inserted into db
                     var id = 0
-                    var newItem = ItemData(id,
+//                    var newItem = ItemData(id,
+//                        newCode!!,
+//                        newName!!,
+//                        newPrice,
+//                        newCost,
+//                        newQuantity,
+//                        newVendor,
+//                        newDescription,
+//                        newShelf,
+//                        newUPC)
+
+                    var newItem1 = Item(id,
                         newCode!!,
                         newName!!,
                         newPrice,
@@ -148,6 +244,16 @@ class ItemActivity : AppCompatActivity() {
                         newUPC)
 
                     //TODO: do something to save the new item to storage
+
+                    itemViewModel.insert(newItem1)
+
+                    // check to see if it was added?
+                    val builder = AlertDialog.Builder(this)
+                    builder.setTitle("Item Added")
+                    builder.setMessage("Item successfully added")
+                    builder.setPositiveButton("Okay", null)
+                    builder.show();
+
                     finish()
                 }
             }

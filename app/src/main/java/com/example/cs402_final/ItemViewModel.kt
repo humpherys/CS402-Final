@@ -14,7 +14,7 @@ class ItemViewModel(private val repository: ItemRepository) : ViewModel() {
 
     // Launch new coroutine to unsert data in a nonblocking way
 
-    suspend fun insert(item: Item) = viewModelScope.launch {
+    fun insert(item: Item) = viewModelScope.launch {
         repository.addItem(item)
     }
 }

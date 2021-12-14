@@ -32,7 +32,7 @@ class SearchResults : Fragment() {
     lateinit var res : LiveData<List<Item>>
 
     // add our ItemModel
-    private lateinit var mItemModel: ItemModel
+    private lateinit var mItemModel: ItemViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,10 +66,10 @@ class SearchResults : Fragment() {
         searchRecyclerView = view.findViewById<RecyclerView>(R.id.search_recycler_view)
         searchRecyclerView.layoutManager = LinearLayoutManager(this.context)
 
-        var item = Item(0, "TEST", "Hammer Test", 15.00, 5.00, 5, "TST", "Test Hammer1", "item_loc", "item_upc", "item_img")
+        var item = Item(0, "TEST", "Hammer Test", 15.00, 5.00, 5, "TST", "Test Hammer1", "item_loc", "item_upc")
 
         //TODO: This needs to be removed once we get the db working
-        resultList = arrayListOf<Item>(Item())
+        resultList = arrayListOf<Item>(item)
 //            ItemData(2, "abc", "Test Item 2", 9.99,5.00,20),
 //            ItemData(3, "abc","Test Item 3", 9.99,5.00,20),
 //            ItemData(4, "abc","Test Item 4", 9.99,5.00,20))
@@ -82,10 +82,10 @@ class SearchResults : Fragment() {
             searchRecyclerView.adapter = searchAdapter;
 
             // Set up item model
-//            mItemModel = ViewModelProvider(this).get(ItemModel::class.java)
-//            mItemModel.readAllData.observe(this, Observer { item ->
-//                searchAdapter.setData(item)
-//            })
+            mItemModel = ViewModelProvider(this).get(ItemViewModel::class.java)
+            mItemModel.allItems.observe(this, Observer { item ->
+                searchAdapter.setData(item as ArrayList<Item>)
+            })
         }
 
 

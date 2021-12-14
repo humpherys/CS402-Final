@@ -15,10 +15,10 @@ data class Item(
     @ColumnInfo(name = "item_vendor_code") var itemVendorCode : String?,
     @ColumnInfo(name = "item_description") var itemDesc : String?,
     @ColumnInfo(name = "item_loc") var itemLoc : String?,
-    @ColumnInfo(name = "item_upc") var itemUPC : String?,
-    @ColumnInfo(name = "item_img") var itemImg : String?
+    @ColumnInfo(name = "item_upc") var itemUPC : String?
+    //@ColumnInfo(name = "item_img") var itemImg : String?
     ) {
     constructor() : this(0, "", "", 0.00, 0.00, 0, "", "", "",
-            "", "")
+            "")
 }
 

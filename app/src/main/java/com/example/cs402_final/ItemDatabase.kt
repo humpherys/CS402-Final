@@ -27,7 +27,7 @@ abstract class ItemDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     ItemDatabase::class.java,
-                    "items"
+                    "items_database"
                 )
                     // Wipes and rebuilds instead of migrating if no Migration object.
                     // Migration is not part of this codelab.
@@ -48,11 +48,11 @@ abstract class ItemDatabase : RoomDatabase() {
 
                 // If you want to keep the data through app restarts,
                 // comment out the following line.
-                INSTANCE?.let { database ->
-                    scope.launch(Dispatchers.IO) {
-                        populateDatabase(database.itemDao)
-                    }
-                }
+//                INSTANCE?.let { database ->
+//                    scope.launch(Dispatchers.IO) {
+//                        populateDatabase(database.itemDao)
+//                    }
+//                }
 
             }
         }
@@ -62,13 +62,20 @@ abstract class ItemDatabase : RoomDatabase() {
             // This will be commented out in the future when we want to have data stored across sessions
             itemDao.deleteAll()
 
-            var item = Item(0, "TEST", "Hammer Test", 15.00, 5.00, 5, "TST", "Test Hammer1", "item_loc", "item_upc", "item_img")
+            var item = Item(0, "TEST", "Hammer Test", 15.00, 5.00, 5, "TST", "Test Hammer1", "item_loc", "item_upc")
             itemDao.insertItems(item)
 
-            // empty constructor
-            var item2 = Item()
+            for(i in 0 until 7){
+                var item = Item(i+1, "TEST$i", "Hammer Test$i", 15.00, 5.00, 5,
+                    "TST$i", "Test Hammer$i", "item_loc$i", "item_upc$i")
 
-            itemDao.insertItems(item2)
+                itemDao.insertItems(item)
+            }
+
+            // empty constructor
+//            var item2 = Item()
+//
+//            itemDao.insertItems(item2)
 
         }
 
@@ -81,7 +88,7 @@ abstract class ItemDatabase : RoomDatabase() {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
                         ItemDatabase::class.java,
-                        "inventory_database"
+                        "items_database"
                     ).fallbackToDestructiveMigration().build()
                     INSTANCE = instance
                 }
