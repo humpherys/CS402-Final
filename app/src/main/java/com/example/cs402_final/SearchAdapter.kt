@@ -8,10 +8,13 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 
 public class SearchAdapter(context: Context, var results: ArrayList<ItemData>)
     : RecyclerView.Adapter<SearchAdapter.ResultsHolder>() {
+
+//    private var itemList = emptyList<Item>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
             : SearchAdapter.ResultsHolder {
@@ -22,12 +25,15 @@ public class SearchAdapter(context: Context, var results: ArrayList<ItemData>)
     override fun getItemCount() = results.size
 
     override fun onBindViewHolder(holder: ResultsHolder, position: Int) {
+        // val item = itemList[position]
         val item = results[position]
+
         holder.apply {
             titleTextView.text = item.name
             titleTextView.setOnClickListener {
                 val addIntent = Intent(itemView.context, ItemActivity::class.java)
                 addIntent.putExtra("item", item)
+                addIntent.putExtra("origin", "search")
                 startActivity(itemView.context, addIntent, null)
             }
         }
@@ -37,4 +43,9 @@ public class SearchAdapter(context: Context, var results: ArrayList<ItemData>)
     class ResultsHolder(view: View) : RecyclerView.ViewHolder(view) {
         val titleTextView: TextView = view.findViewById(R.id.item_name)
     }
+//
+//    fun setData(item: List<Item>){
+//        this.results = item
+//        notifyDataSetChanged()
+//    }
 }

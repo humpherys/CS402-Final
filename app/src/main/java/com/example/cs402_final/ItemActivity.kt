@@ -1,8 +1,11 @@
 package com.example.cs402_final
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
+import android.widget.Button
 import androidx.core.widget.doOnTextChanged
 import com.google.android.material.textfield.TextInputEditText
 
@@ -10,11 +13,23 @@ import com.google.android.material.textfield.TextInputEditText
 class ItemActivity : AppCompatActivity() {
 
     private var displayedItem: ItemData? = null
+    private lateinit var startedFrom: String
+
+    private var newName: String? = null
+    private var newDescription: String? = null
+    private var newCode: String? = null
+    private var newPrice: Double = 0.0
+    private var newCost: Double = 0.0
+    private var newQuantity: Int = 0
+    private var newVendor: String? = null
+    private var newShelf: String? = null
+    private var newUPC: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item)
         val extras = intent.extras
+        startedFrom = extras?.getString("origin") ?: ""
 
         val itemNameContainer = findViewById<TextInputEditText>(R.id.ItemName)
         val itemDescription = findViewById<TextInputEditText>(R.id.ItemDescription)
@@ -26,21 +41,29 @@ class ItemActivity : AppCompatActivity() {
         val itemShelf = findViewById<TextInputEditText>(R.id.ItemShelf)
         val itemUPC = findViewById<TextInputEditText>(R.id.ItemUPC)
 
+        val saveButton = findViewById<Button>(R.id.SaveButton)
+
         itemNameContainer.doOnTextChanged { text, start, before, count ->
             displayedItem?.let {
                 it.name = text.toString()
+            } ?: run {
+                newName = text.toString()
             }
         }
 
         itemDescription.doOnTextChanged { text, start, before, count ->
             displayedItem?.let {
                 it.description = text.toString()
+            } ?: run {
+                newDescription = text.toString()
             }
         }
 
         itemCode.doOnTextChanged { text, start, before, count ->
             displayedItem?.let {
                 it.code = text.toString()
+            } ?: run {
+                newCode = text.toString()
             }
         }
 
@@ -48,6 +71,9 @@ class ItemActivity : AppCompatActivity() {
             displayedItem?.let {
                 val parsedPrice = String.format("%.2f", text.toString().toDouble())
                 it.price = parsedPrice.toDouble()
+            } ?: run {
+                val parsedPrice = String.format("%.2f", text.toString().toDouble())
+                newPrice = parsedPrice.toDouble()
             }
         }
 
@@ -55,32 +81,78 @@ class ItemActivity : AppCompatActivity() {
             displayedItem?.let {
                 val parsedPrice = String.format("%.2f", text.toString().toDouble())
                 it.cost = parsedPrice.toDouble()
+            } ?: run {
+                val parsedPrice = String.format("%.2f", text.toString().toDouble())
+                newCost = parsedPrice.toDouble()
             }
         }
 
         itemQuantity.doOnTextChanged { text, start, before, count ->
             displayedItem?.let {
                 it.qty = text.toString().toInt()
+            } ?: run {
+                newQuantity = text.toString().toInt()
             }
         }
 
         itemVendor.doOnTextChanged { text, start, before, count ->
             displayedItem?.let {
                 it.vendor = text.toString()
+            } ?: run {
+                newVendor = text.toString()
             }
         }
 
         itemShelf.doOnTextChanged { text, start, before, count ->
             displayedItem?.let {
                 it.shelf = text.toString()
+            } ?: run {
+                newShelf = text.toString()
             }
         }
 
         itemUPC.doOnTextChanged { text, start, before, count ->
             displayedItem?.let {
                 it.upc = text.toString()
+            } ?: run {
+                newUPC = text.toString()
             }
         }
+
+        saveButton.setOnClickListener {
+            if(startedFrom.equals("search")) {
+                //TODO: do something here to save data from the existing item to storage
+                //TODO: Also need to figure out how to properly update the search list on return
+                    //or maybe just clear the search?
+                finish()
+            } else if(startedFrom.equals("main") || startedFrom.equals("")) {
+                if(newCode == null || newName == null) {
+                    val builder = AlertDialog.Builder(this)
+                    builder.setTitle("Cannot save!")
+                    builder.setMessage("Item name and item code must be set before saving!")
+                    builder.setPositiveButton("Okay", null)
+                    builder.show();
+                } else {
+                    //TODO: We need a way to choose what the new id will be
+                    // Maybe it will just be auto set to something different when inserted into db
+                    var id = 0
+                    var newItem = ItemData(id,
+                        newCode!!,
+                        newName!!,
+                        newPrice,
+                        newCost,
+                        newQuantity,
+                        newVendor,
+                        newDescription,
+                        newShelf,
+                        newUPC)
+
+                    //TODO: do something to save the new item to storage
+                    finish()
+                }
+            }
+        }
+
 
         //If we ever need a listener for the Next key, this works as a template
         //It's how I handled text updates until I found out about doOnTextChanged

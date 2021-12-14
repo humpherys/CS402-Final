@@ -4,6 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,15 +32,19 @@ class MainActivity : AppCompatActivity() {
         val addButton = findViewById<Button>(R.id.button5)
         addButton.setOnClickListener {
             val addIntent = Intent(this, ItemActivity::class.java)
-
+            addIntent.putExtra("origin", "main")
             //This is for testing intent passing, should be removed eventually
 //            val testItem = ItemData(1, "abc","Test Item Name", 9.99,5.00,20)
 //            addIntent.putExtra("item", testItem)
             startActivity(addIntent)
         }
 
+        val tagButton = findViewById<Button>(R.id.button3)
+        tagButton.setOnClickListener {
+            val tagIntent = Intent(this, TagActivity::class.java)
+            startActivity(tagIntent)
+        }
+
     }
-
-
 
 }
