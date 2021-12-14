@@ -22,9 +22,7 @@ class MainActivity : AppCompatActivity() {
 //    ).build()
 
     private val newItemActivityRequestCode = 1
-    private val itemViewModel : ItemViewModel by viewModels {
-        ItemViewModelFactory((application as ItemsApplication).repository)
-    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -54,81 +54,81 @@ class ItemActivity : AppCompatActivity() {
 
         val saveButton = findViewById<Button>(R.id.SaveButton)
 
-        itemNameContainer.doOnTextChanged { text, start, before, count ->
-            displayedItem?.let {
-                it.name = text.toString()
-            } ?: run {
-                newName = text.toString()
-            }
-        }
-
-        itemDescription.doOnTextChanged { text, start, before, count ->
-            displayedItem?.let {
-                it.description = text.toString()
-            } ?: run {
-                newDescription = text.toString()
-            }
-        }
-
-        itemCode.doOnTextChanged { text, start, before, count ->
-            displayedItem?.let {
-                it.code = text.toString()
-            } ?: run {
-                newCode = text.toString()
-            }
-        }
-
-        itemPrice.doOnTextChanged { text, start, before, count ->
-            displayedItem?.let {
-                val parsedPrice = String.format("%.2f", text.toString().toDouble())
-                it.price = parsedPrice.toDouble()
-            } ?: run {
-                val parsedPrice = String.format("%.2f", text.toString().toDouble())
-                newPrice = parsedPrice.toDouble()
-            }
-        }
-
-        itemCost.doOnTextChanged { text, start, before, count ->
-            displayedItem?.let {
-                val parsedPrice = String.format("%.2f", text.toString().toDouble())
-                it.cost = parsedPrice.toDouble()
-            } ?: run {
-                val parsedPrice = String.format("%.2f", text.toString().toDouble())
-                newCost = parsedPrice.toDouble()
-            }
-        }
-
-        itemQuantity.doOnTextChanged { text, start, before, count ->
-            displayedItem?.let {
-                it.qty = text.toString().toInt()
-            } ?: run {
-                newQuantity = text.toString().toInt()
-            }
-        }
-
-        itemVendor.doOnTextChanged { text, start, before, count ->
-            displayedItem?.let {
-                it.vendor = text.toString()
-            } ?: run {
-                newVendor = text.toString()
-            }
-        }
-
-        itemShelf.doOnTextChanged { text, start, before, count ->
-            displayedItem?.let {
-                it.shelf = text.toString()
-            } ?: run {
-                newShelf = text.toString()
-            }
-        }
-
-        itemUPC.doOnTextChanged { text, start, before, count ->
-            displayedItem?.let {
-                it.upc = text.toString()
-            } ?: run {
-                newUPC = text.toString()
-            }
-        }
+//        itemNameContainer.doOnTextChanged { text, start, before, count ->
+//            displayedItem?.let {
+//                it.name = text.toString()
+//            } ?: run {
+//                newName = text.toString()
+//            }
+//        }
+//
+//        itemDescription.doOnTextChanged { text, start, before, count ->
+//            displayedItem?.let {
+//                it.description = text.toString()
+//            } ?: run {
+//                newDescription = text.toString()
+//            }
+//        }
+//
+//        itemCode.doOnTextChanged { text, start, before, count ->
+//            displayedItem?.let {
+//                it.code = text.toString()
+//            } ?: run {
+//                newCode = text.toString()
+//            }
+//        }
+//
+//        itemPrice.doOnTextChanged { text, start, before, count ->
+//            displayedItem?.let {
+//                val parsedPrice = String.format("%.2f", text.toString().toDouble())
+//                it.price = parsedPrice.toDouble()
+//            } ?: run {
+//                val parsedPrice = String.format("%.2f", text.toString().toDouble())
+//                newPrice = parsedPrice.toDouble()
+//            }
+//        }
+//
+//        itemCost.doOnTextChanged { text, start, before, count ->
+//            displayedItem?.let {
+//                val parsedPrice = String.format("%.2f", text.toString().toDouble())
+//                it.cost = parsedPrice.toDouble()
+//            } ?: run {
+//                val parsedPrice = String.format("%.2f", text.toString().toDouble())
+//                newCost = parsedPrice.toDouble()
+//            }
+//        }
+//
+//        itemQuantity.doOnTextChanged { text, start, before, count ->
+//            displayedItem?.let {
+//                it.qty = text.toString().toInt()
+//            } ?: run {
+//                newQuantity = text.toString().toInt()
+//            }
+//        }
+//
+//        itemVendor.doOnTextChanged { text, start, before, count ->
+//            displayedItem?.let {
+//                it.vendor = text.toString()
+//            } ?: run {
+//                newVendor = text.toString()
+//            }
+//        }
+//
+//        itemShelf.doOnTextChanged { text, start, before, count ->
+//            displayedItem?.let {
+//                it.shelf = text.toString()
+//            } ?: run {
+//                newShelf = text.toString()
+//            }
+//        }
+//
+//        itemUPC.doOnTextChanged { text, start, before, count ->
+//            displayedItem?.let {
+//                it.upc = text.toString()
+//            } ?: run {
+//                newUPC = text.toString()
+//            }
+//        }
 
         // ------------------------------- Masons Above, Jacob Below, Jacob is for DB
 
@@ -213,6 +213,21 @@ class ItemActivity : AppCompatActivity() {
                 //TODO: do something here to save data from the existing item to storage
                 //TODO: Also need to figure out how to properly update the search list on return, Room should do this for us
                     //or maybe just clear the search?
+                var newItem1 = Item(0,
+                    newCode!!,
+                    newName!!,
+                    newPrice,
+                    newCost,
+                    newQuantity,
+                    newVendor,
+                    newDescription,
+                    newShelf,
+                    newUPC)
+
+                // Write updateItem function and uncomment line below for updating
+                // itemViewModel.updateItem(newItem1)
+
+
                 finish()
             } else if(startedFrom.equals("main") || startedFrom.equals("")) {
                 if(newCode == null || newName == null) {
@@ -224,7 +239,7 @@ class ItemActivity : AppCompatActivity() {
                 } else {
                     //TODO: We need a way to choose what the new id will be
                     // Maybe it will just be auto set to something different when inserted into db
-                    var id = 0
+                    // var id = 0
 //                    var newItem = ItemData(id,
 //                        newCode!!,
 //                        newName!!,
@@ -236,7 +251,7 @@ class ItemActivity : AppCompatActivity() {
 //                        newShelf,
 //                        newUPC)
 
-                    var newItem1 = Item(id,
+                    var newItem1 = Item(0,
                         newCode!!,
                         newName!!,
                         newPrice,
@@ -253,11 +268,6 @@ class ItemActivity : AppCompatActivity() {
                     finish()
                 }
                 // check to see if it was added?
-                val builder = AlertDialog.Builder(this)
-                builder.setTitle("Item Added")
-                builder.setMessage("Item successfully added")
-                builder.setPositiveButton("Okay", null)
-                builder.show();
             }
         }
 

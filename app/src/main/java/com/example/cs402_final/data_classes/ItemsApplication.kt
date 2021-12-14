@@ -14,5 +14,5 @@ class ItemsApplication : Application() {
     // Using by lazy so the database and repository are only created when theyre needed
     // rather than when the application starts
     val database by lazy { ItemDatabase.getDatabase(this, applicationScope) }
-    val repository by lazy { ItemRepository(database.itemDao) }
+    val repository by lazy { ItemRepository(database.itemDao()) }
 }

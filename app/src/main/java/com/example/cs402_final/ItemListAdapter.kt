@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ListAdapter
 import android.widget.ScrollView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +20,7 @@ import com.example.cs402_final.data_classes.ItemViewModel
 import org.w3c.dom.Text
 
 
-class ItemListAdapter: RecyclerView.Adapter<ItemListAdapter.ItemViewHolder>() {
+class ItemListAdapter(context: Context, var results: LiveData<List<Item>>): RecyclerView.Adapter<ItemListAdapter.ItemViewHolder>() {
 
     private var itemList = emptyList<Item>()
 
@@ -33,13 +34,18 @@ class ItemListAdapter: RecyclerView.Adapter<ItemListAdapter.ItemViewHolder>() {
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
 
+
+
         //holder.bindTo(getItemId(position))
-        val current = itemList[position]
+        val current = getItemId(position)
+
 
         holder.apply {
-            holder.itemNameText.text= current.itemName.toString()
+            holder.itemNameText.text= current.to
             holder.itemNameText.setOnClickListener {
                 val addIntent = Intent(itemView.context, ItemActivity::class.java)
+                addIntent.putExtra("origin", "search")
+                ContextCompat.startActivity(itemView.context, addIntent, null)
             }
         }
     }

@@ -19,7 +19,35 @@ import com.example.cs402_final.data_classes.Vendor
 abstract class ItemDatabase : RoomDatabase() {
 
     // Set up local database
-    abstract val itemDao : ItemDao
+    abstract fun itemDao() : ItemDao
+
+    private class ItemCallback(
+        private val scope : CoroutineScope
+    ) : RoomDatabase.Callback() {
+        override fun onCreate(db: SupportSQLiteDatabase) {
+            super.onCreate(db)
+
+            // If you want to keep the data through app restarts,
+            // comment out the following line.
+            INSTANCE?.let { database ->
+                scope.launch() {
+                    var itemDao = database.itemDao()
+                    // Clean database of all entries
+                    // This will be commented out in the future when we want to have data stored across sessions
+//                    itemDao.deleteAll()
+                    for(i in 0 until 5){
+                        // use 0 as index so it will autogenerate
+                        var inItem = Item(0, "TEST$i", "Hammer 1 Test$i", 15.00 + i, 5.00 + i, 5 + i, "TST$i", "Test Hammer$i", "item_loc$i", "item_upc$i")
+                        itemDao.insertItems(inItem)
+                    }
+//
+//                    var item = Item(0, "TEST", "Hammer 1 Test", 15.00, 5.00, 5, "TST", "Test Hammer1", "item_loc", "item_upc")
+//                    itemDao.insertItems(item)
+
+                }
+            }
+        }
+    }
 
     companion object{
         @Volatile
@@ -34,55 +62,11 @@ abstract class ItemDatabase : RoomDatabase() {
                     context.applicationContext,
                     ItemDatabase::class.java,
                     "items_database"
-                )
-                    // Wipes and rebuilds instead of migrating if no Migration object.
-                    // Migration is not part of this codelab.
-                    .fallbackToDestructiveMigration()
-                    .addCallback(ItemCallback(scope))
-                    .build()
+                ).addCallback(ItemCallback(scope)).build()
                 INSTANCE = instance
                 // return instance
-                instance
+                return instance
             }
-        }
-
-        private class ItemCallback(
-            private val scope : CoroutineScope
-        ) : RoomDatabase.Callback() {
-            override fun onCreate(db: SupportSQLiteDatabase) {
-                super.onCreate(db)
-
-                // If you want to keep the data through app restarts,
-                // comment out the following line.
-                INSTANCE?.let { database ->
-                    scope.launch(Dispatchers.IO) {
-                        populateDatabase(database.itemDao)
-                    }
-                }
-
-            }
-        }
-
-        suspend fun populateDatabase(itemDao: ItemDao){
-            // Clean database of all entries
-            // This will be commented out in the future when we want to have data stored across sessions
-            itemDao.deleteAll()
-
-            var item = Item(0, "TEST", "Hammer Test", 15.00, 5.00, 5, "TST", "Test Hammer1", "item_loc", "item_upc")
-            itemDao.insertItems(item)
-
-            for(i in 0 until 7){
-                var item = Item(i+1, "TEST$i", "Hammer Test$i", 15.00, 5.00, 5,
-                    "TST$i", "Test Hammer$i", "item_loc$i", "item_upc$i")
-
-                itemDao.insertItems(item)
-            }
-
-            // empty constructor
-//            var item2 = Item()
-//
-//            itemDao.insertItems(item2)
-
         }
 
         // gets instance of Room and adds it if it does not exist

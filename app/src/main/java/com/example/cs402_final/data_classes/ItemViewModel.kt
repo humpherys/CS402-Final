@@ -11,14 +11,20 @@ class ItemViewModel(private val repository: ItemRepository) : ViewModel() {
     //   the UI when the data actually changes.
     // - Repository is completely separated from the UI through the ViewModel.
 
-    val allItems: LiveData<List<Item>> by lazy {
-        repository.readAllData
+
+
+    val allItems: LiveData<List<Item>> = repository.readAllData
+
+    fun getItemName(itemName: String) {
+        return repository.getItem(itemName)
     }
 
     // Launch new coroutine to unsert data in a nonblocking way
 
-    fun insert(item: Item) = viewModelScope.launch {
-        repository.addItem(item)
+    fun insert(item: Item)  {
+        viewModelScope.launch {
+            repository.addItem(item)
+        }
     }
 }
 

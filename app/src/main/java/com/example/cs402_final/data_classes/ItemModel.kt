@@ -43,7 +43,7 @@ class ItemModel(application: Application): AndroidViewModel(application) {
         //This is placeholder, not sure if we'll need something here like the project with the json
         //loading. Use a normal ArrayList until we decide we need something more
 
-        val itemDao = ItemDatabase.getInstance(application).itemDao
+        val itemDao = ItemDatabase.getInstance(application).itemDao()
         repository = ItemRepository(itemDao)
         readAllData = repository.readAllData
     }
