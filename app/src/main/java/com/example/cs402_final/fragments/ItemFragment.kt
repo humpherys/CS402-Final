@@ -1,4 +1,4 @@
-package com.example.cs402_final
+package com.example.cs402_final.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -1,4 +1,4 @@
-package com.example.cs402_final
+package com.example.cs402_final.adapters
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.cs402_final.data_classes.Item
+import com.example.cs402_final.activities.ItemActivity
+import com.example.cs402_final.R
 
 /**
  * This is the pretty much the same as Mason's with a few changes to handle Room.

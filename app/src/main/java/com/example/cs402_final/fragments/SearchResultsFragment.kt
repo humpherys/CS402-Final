@@ -1,19 +1,20 @@
-package com.example.cs402_final
+package com.example.cs402_final.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.cs402_final.ItemData
+import com.example.cs402_final.ItemModel
+import com.example.cs402_final.R
+import com.example.cs402_final.adapters.SearchAdapter
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val ARG_FRAG = "fragType"
 
 /**
  * A simple [Fragment] subclass.
@@ -22,8 +23,8 @@ private const val ARG_PARAM2 = "param2"
  */
 class SearchResults : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var fragType: String? = null
+
 
     private lateinit var searchRecyclerView: RecyclerView
     private lateinit var resultList : ArrayList<ItemData>
@@ -34,8 +35,8 @@ class SearchResults : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            fragType = it.getString(ARG_FRAG)
+            resultList = it.getParcelableArrayList<ItemData>("results") as ArrayList<ItemData>
         }
 
     }
@@ -54,26 +55,25 @@ class SearchResults : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        searchRecyclerView = view.findViewById<RecyclerView>(R.id.search_recycler_view)
-        searchRecyclerView.layoutManager = LinearLayoutManager(this.context)
 
-        //TODO: This needs to be removed once we get the db working
-        resultList = arrayListOf<ItemData>(ItemData(1, "abc","Test Item 1", 9.99,5.00,20),
-            ItemData(2, "abc","Test Item 2", 9.99,5.00,20),
-            ItemData(3, "abc","Test Item 3", 9.99,5.00,20),
-            ItemData(4, "abc","Test Item 4", 9.99,5.00,20))
+        if(fragType.equals("search")) {
+            searchRecyclerView = view.findViewById<RecyclerView>(R.id.search_recycler_view)
+            searchRecyclerView.layoutManager = LinearLayoutManager(this.context)
 //
-        this.context.let {
+            this.context.let {
 //            val searchAdapter: SearchAdapter = SearchAdapter()
-            //resultList = emptyList()
-            val searchAdapter: SearchAdapter  = SearchAdapter(it!!, resultList)
-            searchRecyclerView.adapter = searchAdapter;
+                //resultList = emptyList()
+                val searchAdapter: SearchAdapter = SearchAdapter(it!!, resultList)
+                searchRecyclerView.adapter = searchAdapter;
 
-            // Set up item model
+                // Set up item model
 //            mItemModel = ViewModelProvider(this).get(ItemModel::class.java)
 //            mItemModel.readAllData.observe(this, Observer { item ->
 //                searchAdapter.setData(item)
 //            })
+            }
+        } else if(fragType.equals("update")) {
+            //TODO: init recyclerview for updating quantities
         }
 
 
@@ -93,8 +93,7 @@ class SearchResults : Fragment() {
         fun newInstance(param1: String, param2: String) =
             SearchResults().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putString(ARG_FRAG, fragType)
                 }
             }
     }
