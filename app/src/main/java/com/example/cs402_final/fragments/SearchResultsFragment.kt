@@ -11,10 +11,11 @@ import com.example.cs402_final.ItemData
 import com.example.cs402_final.ItemModel
 import com.example.cs402_final.R
 import com.example.cs402_final.adapters.SearchAdapter
+import com.example.cs402_final.adapters.UpdateAdapter
 
-// TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_FRAG = "fragType"
+private const val ARG_RESULTS = "results"
 
 /**
  * A simple [Fragment] subclass.
@@ -27,7 +28,7 @@ class SearchResults : Fragment() {
 
 
     private lateinit var searchRecyclerView: RecyclerView
-    private lateinit var resultList : ArrayList<ItemData>
+    private lateinit var resultList: ArrayList<ItemData>
 
     // add our ItemModel
     private lateinit var mItemModel: ItemModel
@@ -36,7 +37,9 @@ class SearchResults : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             fragType = it.getString(ARG_FRAG)
-            resultList = it.getParcelableArrayList<ItemData>("results") as ArrayList<ItemData>
+            resultList = it.getParcelableArrayList<ItemData>(ARG_RESULTS) as ArrayList<ItemData>
+        } ?: run {
+            resultList = ArrayList<ItemData>()
         }
 
     }
@@ -56,24 +59,26 @@ class SearchResults : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if(fragType.equals("search")) {
-            searchRecyclerView = view.findViewById<RecyclerView>(R.id.search_recycler_view)
-            searchRecyclerView.layoutManager = LinearLayoutManager(this.context)
-//
-            this.context.let {
-//            val searchAdapter: SearchAdapter = SearchAdapter()
-                //resultList = emptyList()
-                val searchAdapter: SearchAdapter = SearchAdapter(it!!, resultList)
-                searchRecyclerView.adapter = searchAdapter;
 
-                // Set up item model
+        searchRecyclerView = view.findViewById<RecyclerView>(R.id.search_recycler_view)
+        searchRecyclerView.layoutManager = LinearLayoutManager(this.context)
+//
+        this.context.let {
+//            val searchAdapter: SearchAdapter = SearchAdapter()
+            //resultList = emptyList()
+            if(fragType.equals("search")) {
+                val searchAdapter: SearchAdapter = SearchAdapter(it!!, resultList)
+                searchRecyclerView.adapter = searchAdapter
+            } else if(fragType.equals("update") || fragType.equals("tagManage")) {
+                val updateAdapter: UpdateAdapter = UpdateAdapter(it!!, resultList)
+                searchRecyclerView.adapter = updateAdapter
+            }
+
+            // Set up item model
 //            mItemModel = ViewModelProvider(this).get(ItemModel::class.java)
 //            mItemModel.readAllData.observe(this, Observer { item ->
 //                searchAdapter.setData(item)
 //            })
-            }
-        } else if(fragType.equals("update")) {
-            //TODO: init recyclerview for updating quantities
         }
 
 
@@ -94,6 +99,7 @@ class SearchResults : Fragment() {
             SearchResults().apply {
                 arguments = Bundle().apply {
                     putString(ARG_FRAG, fragType)
+                    putParcelableArrayList(ARG_FRAG, resultList)
                 }
             }
     }
