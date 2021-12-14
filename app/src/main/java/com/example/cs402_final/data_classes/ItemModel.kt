@@ -1,13 +1,16 @@
 package com.example.cs402_final
 
 import android.app.Application
+import android.os.Parcelable
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import androidx.room.DatabaseView
+import com.example.cs402_final.data_classes.Item
+import com.example.cs402_final.data_classes.ItemRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.io.Serializable
+import kotlinx.parcelize.Parcelize
 
 /**
  * jacobhill - I changed this up a bit based on what I think we needed to do to handle Room
@@ -17,6 +20,7 @@ import java.io.Serializable
 //the add/edit item screen
 
 @DatabaseView()
+@Parcelize
 data class ItemData(var id: Int,
                     var code: String,
                     var name: String,
@@ -27,7 +31,7 @@ data class ItemData(var id: Int,
                     var description: String? = null,
                     var shelf: String? = null,
                     var upc: String? = null
-) : Serializable
+) : Parcelable
 
 class ItemModel(application: Application): AndroidViewModel(application) {
 

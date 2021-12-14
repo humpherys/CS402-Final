@@ -1,6 +1,8 @@
-package com.example.cs402_final
+package com.example.cs402_final.data_classes
 
 import androidx.lifecycle.LiveData
+import com.example.cs402_final.data_classes.Item
+import com.example.cs402_final.data_classes.ItemDao
 
 class ItemRepository(private val itemDao : ItemDao) {
 
