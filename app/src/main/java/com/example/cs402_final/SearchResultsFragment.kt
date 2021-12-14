@@ -66,27 +66,21 @@ class SearchResults : Fragment() {
         searchRecyclerView = view.findViewById<RecyclerView>(R.id.search_recycler_view)
         searchRecyclerView.layoutManager = LinearLayoutManager(this.context)
 
-
-        /**
-         * This is used for the ArrayList implementation Mason did
-         */
-//        resultList = arrayListOf<ItemData>(ItemData(1, "abc","Test Item 1", 9.99,5.00,20),
-//            ItemData(2, "abc","Test Item 2", 9.99,5.00,20),
-//            ItemData(3, "abc","Test Item 3", 9.99,5.00,20),
-//            ItemData(4, "abc","Test Item 4", 9.99,5.00,20))
+        //TODO: This needs to be removed once we get the db working
+        resultList = arrayListOf<ItemData>(ItemData(1, "abc","Test Item 1", 9.99,5.00,20),
+            ItemData(2, "abc","Test Item 2", 9.99,5.00,20),
+            ItemData(3, "abc","Test Item 3", 9.99,5.00,20),
+            ItemData(4, "abc","Test Item 4", 9.99,5.00,20))
 //
-        // Set up item model
-        mItemModel = ViewModelProvider(this).get(ItemModel::class.java)
-
-        resultList = mItemModel.readAllData
-
         this.context.let {
-//            val searchAdapter: SearchListAdapter = SearchListAdapter()
-//            resultList = emptyList()
+//            val searchAdapter: SearchAdapter = SearchAdapter()
+            //resultList = emptyList()
             val searchAdapter: SearchAdapter  = SearchAdapter(it!!, resultList)
 
             searchRecyclerView.adapter = searchAdapter;
 
+            // Set up item model
+//            mItemModel = ViewModelProvider(this).get(ItemModel::class.java)
 //            mItemModel.readAllData.observe(this, Observer { item ->
 //                searchAdapter.setData(item)
 //            })

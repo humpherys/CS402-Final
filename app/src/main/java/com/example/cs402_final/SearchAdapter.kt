@@ -11,7 +11,7 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 
-public class SearchAdapter(context: Context, var results: List<Item>)
+public class SearchAdapter(context: Context, var results: ArrayList<ItemData>)
     : RecyclerView.Adapter<SearchAdapter.ResultsHolder>() {
 
 //    private var itemList = emptyList<Item>()
@@ -32,7 +32,8 @@ public class SearchAdapter(context: Context, var results: List<Item>)
             titleTextView.text = item.itemName
             titleTextView.setOnClickListener {
                 val addIntent = Intent(itemView.context, ItemActivity::class.java)
-                //addIntent.putExtra("item", item)
+                addIntent.putExtra("item", item)
+                addIntent.putExtra("origin", "search")
                 startActivity(itemView.context, addIntent, null)
             }
         }

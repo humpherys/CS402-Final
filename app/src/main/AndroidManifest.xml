@@ -21,6 +21,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CS402Final">
         <activity
+            android:name=".TagActivity"
+            android:exported="false" />
+        <activity
             android:name=".ItemActivity"
             android:exported="false" />
         <activity
