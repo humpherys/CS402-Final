@@ -33,6 +33,7 @@ public class SearchAdapter(context: Context, var results: ArrayList<ItemData>)
             titleTextView.setOnClickListener {
                 val addIntent = Intent(itemView.context, ItemActivity::class.java)
                 addIntent.putExtra("item", item)
+                addIntent.putExtra("origin", "search")
                 startActivity(itemView.context, addIntent, null)
             }
         }

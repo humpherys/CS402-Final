@@ -56,6 +56,8 @@ class SearchResults : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         searchRecyclerView = view.findViewById<RecyclerView>(R.id.search_recycler_view)
         searchRecyclerView.layoutManager = LinearLayoutManager(this.context)
+
+        //TODO: This needs to be removed once we get the db working
         resultList = arrayListOf<ItemData>(ItemData(1, "abc","Test Item 1", 9.99,5.00,20),
             ItemData(2, "abc","Test Item 2", 9.99,5.00,20),
             ItemData(3, "abc","Test Item 3", 9.99,5.00,20),
