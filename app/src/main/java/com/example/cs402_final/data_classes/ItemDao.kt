@@ -1,7 +1,8 @@
-package com.example.cs402_final
+package com.example.cs402_final.data_classes
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.example.cs402_final.data_classes.Item
 
 /**
  * This is class to interact with the database. Contains functions to make it easier to get and add data

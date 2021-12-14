@@ -6,10 +6,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import androidx.room.DatabaseView
+import com.example.cs402_final.data_classes.Item
+import com.example.cs402_final.data_classes.ItemRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.parcelize.Parcelize
-import java.io.Serializable
 
 /**
  * jacobhill - I changed this up a bit based on what I think we needed to do to handle Room

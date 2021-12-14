@@ -4,6 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.cs402_final.data_classes.Item
+import com.example.cs402_final.data_classes.ItemDao
+import com.example.cs402_final.data_classes.User
+import com.example.cs402_final.data_classes.Vendor
 
 @Database(entities = [Item::class, Vendor::class, User::class], views = [ItemData::class], version = 1) abstract class AppDatabase : RoomDatabase()
 abstract class ItemDatabase : RoomDatabase() {

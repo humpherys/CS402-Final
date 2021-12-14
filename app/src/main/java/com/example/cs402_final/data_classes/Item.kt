@@ -1,4 +1,4 @@
-package com.example.cs402_final
+package com.example.cs402_final.data_classes
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

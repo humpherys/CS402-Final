@@ -1,13 +1,12 @@
-package com.example.cs402_final
+package com.example.cs402_final.adapters
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.cs402_final.R
 
 //TODO: We will probably need more info in the tag data eventually, but idk what the db structure is
 data class TagData(var tagName: String)
@@ -15,7 +14,7 @@ data class TagData(var tagName: String)
 public class TagAdapter(context: Context, private var tagList: ArrayList<TagData> ) : RecyclerView.Adapter<TagAdapter.TagHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
-            : TagAdapter.TagHolder {
+            : TagHolder {
         val view = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_item_view, parent, false)
         return TagHolder(view)
     }

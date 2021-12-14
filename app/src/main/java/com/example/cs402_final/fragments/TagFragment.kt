@@ -1,4 +1,4 @@
-package com.example.cs402_final
+package com.example.cs402_final.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.cs402_final.R
+import com.example.cs402_final.adapters.TagAdapter
+import com.example.cs402_final.adapters.TagData
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

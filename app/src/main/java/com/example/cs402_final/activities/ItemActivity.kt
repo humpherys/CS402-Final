@@ -1,12 +1,12 @@
-package com.example.cs402_final
+package com.example.cs402_final.activities
 
 import android.app.AlertDialog
-import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import androidx.core.widget.doOnTextChanged
+import com.example.cs402_final.ItemData
+import com.example.cs402_final.R
 import com.google.android.material.textfield.TextInputEditText
 
 
