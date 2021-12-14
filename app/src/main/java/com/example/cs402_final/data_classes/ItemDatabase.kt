@@ -4,17 +4,16 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-<<<<<<< HEAD:app/src/main/java/com/example/cs402_final/ItemDatabase.kt
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-=======
+
 import com.example.cs402_final.data_classes.Item
 import com.example.cs402_final.data_classes.ItemDao
 import com.example.cs402_final.data_classes.User
 import com.example.cs402_final.data_classes.Vendor
->>>>>>> main:app/src/main/java/com/example/cs402_final/data_classes/ItemDatabase.kt
+
 
 @Database(entities = [Item::class], version = 1, exportSchema = false)
 abstract class ItemDatabase : RoomDatabase() {
@@ -55,11 +54,11 @@ abstract class ItemDatabase : RoomDatabase() {
 
                 // If you want to keep the data through app restarts,
                 // comment out the following line.
-//                INSTANCE?.let { database ->
-//                    scope.launch(Dispatchers.IO) {
-//                        populateDatabase(database.itemDao)
-//                    }
-//                }
+                INSTANCE?.let { database ->
+                    scope.launch(Dispatchers.IO) {
+                        populateDatabase(database.itemDao)
+                    }
+                }
 
             }
         }

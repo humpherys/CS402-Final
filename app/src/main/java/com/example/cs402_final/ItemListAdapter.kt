@@ -6,55 +6,51 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListAdapter
+import android.widget.ScrollView
 import android.widget.TextView
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.cs402_final.activities.ItemActivity
+import com.example.cs402_final.adapters.SearchAdapter
+import com.example.cs402_final.adapters.SearchListAdapter
+import com.example.cs402_final.data_classes.Item
+import com.example.cs402_final.data_classes.ItemViewModel
+import org.w3c.dom.Text
 
-class ItemListAdapter(context: Context, var results: List<Item>) {
 
-//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-//
-//        return ItemViewHolder.create(parent)
-//    }
+class ItemListAdapter: RecyclerView.Adapter<ItemListAdapter.ItemViewHolder>() {
 
-//    override fun onBindViewHolder(holder: ItemViewHolder, position: Int){
-//        val current = results[position]
-//
-//        holder.apply {
-//
-//            itemItemView.text = current.itemName
-//            itemItemView.setOnClickListener {
-//                val addIntent = Intent(itemView.context, ItemActivity::class.java)
-//            }
-//        }
-//    }
-
+    private var itemList = emptyList<Item>()
 
     class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val itemNameText: TextView = itemView.findViewById(R.id.item_name)
+    }
 
-        val itemItemView: TextView = itemView.findViewById(R.id.item_name)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
+        return ItemViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.search_item_view, parent, false))
+    }
 
-        fun bind(text: String?) {
-            itemItemView.text = text
-        }
+    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
 
-        companion object {
-            fun create(parent: ViewGroup): ItemViewHolder {
-                val view: View = LayoutInflater.from(parent.context).inflate(R.layout.fragment_search_results, parent, false)
-                return ItemViewHolder(view)
+        //holder.bindTo(getItemId(position))
+        val current = itemList[position]
+
+        holder.apply {
+            holder.itemNameText.text= current.itemName.toString()
+            holder.itemNameText.setOnClickListener {
+                val addIntent = Intent(itemView.context, ItemActivity::class.java)
             }
         }
     }
 
-    companion object {
-        private val ITEMS_COMPARATOR = object : DiffUtil.ItemCallback<Item>() {
-            override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
-                return oldItem === newItem
-            }
-
-            override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean {
-                return oldItem.itemName == newItem.itemName
-            }
-        }
+    override fun getItemCount(): Int {
+        return itemList.size
     }
+
+    fun setData(item: List<Item>){
+        this.itemList = item
+        notifyDataSetChanged()
+    }
+
 }

@@ -7,14 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
-<<<<<<< HEAD:app/src/main/java/com/example/cs402_final/SearchAdapter.kt
 import kotlinx.coroutines.flow.Flow
-=======
+
 import com.example.cs402_final.activities.ItemActivity
 import com.example.cs402_final.ItemData
 import com.example.cs402_final.R
->>>>>>> main:app/src/main/java/com/example/cs402_final/adapters/SearchAdapter.kt
+import com.example.cs402_final.data_classes.Item
 
 public class SearchAdapter(context: Context, var results: ArrayList<Item>)
     : RecyclerView.Adapter<SearchAdapter.ResultsHolder>() {

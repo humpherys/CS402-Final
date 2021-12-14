@@ -8,6 +8,10 @@ import androidx.activity.viewModels
 import androidx.core.widget.doOnTextChanged
 import com.example.cs402_final.ItemData
 import com.example.cs402_final.R
+import com.example.cs402_final.data_classes.Item
+import com.example.cs402_final.data_classes.ItemViewModel
+import com.example.cs402_final.data_classes.ItemViewModelFactory
+import com.example.cs402_final.data_classes.ItemsApplication
 import com.google.android.material.textfield.TextInputEditText
 
 
@@ -246,16 +250,14 @@ class ItemActivity : AppCompatActivity() {
                     //TODO: do something to save the new item to storage
 
                     itemViewModel.insert(newItem1)
-
-                    // check to see if it was added?
-                    val builder = AlertDialog.Builder(this)
-                    builder.setTitle("Item Added")
-                    builder.setMessage("Item successfully added")
-                    builder.setPositiveButton("Okay", null)
-                    builder.show();
-
                     finish()
                 }
+                // check to see if it was added?
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Item Added")
+                builder.setMessage("Item successfully added")
+                builder.setPositiveButton("Okay", null)
+                builder.show();
             }
         }
 

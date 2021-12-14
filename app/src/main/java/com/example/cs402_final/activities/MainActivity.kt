@@ -4,14 +4,15 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-<<<<<<< HEAD:app/src/main/java/com/example/cs402_final/MainActivity.kt
+import com.example.cs402_final.data_classes.ItemViewModel
+import com.example.cs402_final.data_classes.ItemViewModelFactory
+import com.example.cs402_final.data_classes.ItemsApplication
 import androidx.activity.viewModels
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-=======
+
 import com.example.cs402_final.R
->>>>>>> main:app/src/main/java/com/example/cs402_final/activities/MainActivity.kt
 
 class MainActivity : AppCompatActivity() {
 

@@ -5,19 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-<<<<<<< HEAD:app/src/main/java/com/example/cs402_final/SearchResultsFragment.kt
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-=======
->>>>>>> main:app/src/main/java/com/example/cs402_final/fragments/SearchResultsFragment.kt
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cs402_final.ItemData
 import com.example.cs402_final.ItemModel
 import com.example.cs402_final.R
 import com.example.cs402_final.adapters.SearchAdapter
+import com.example.cs402_final.data_classes.Item
+import com.example.cs402_final.data_classes.ItemViewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -44,13 +43,12 @@ class SearchResults : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             fragType = it.getString(ARG_FRAG)
-            resultList = it.getParcelableArrayList<ItemData>("results") as ArrayList<ItemData>
+            resultList = it.getParcelableArrayList<ItemData>("results") as ArrayList<Item>
         }
 
         val itemObserver = Observer<LiveData<List<Item>>> {
             newName -> res = newName
         }
-
     }
 
     override fun onCreateView(
@@ -62,6 +60,8 @@ class SearchResults : Fragment() {
         // Inflate the layout for this fragment
         // return inflater.inflate(R.layout.fragment_search_results, container, false)
 
+        //val recyclerView = view.search_recycler_view
+        //recyclerView.adapter
 
 
         return view
@@ -69,7 +69,6 @@ class SearchResults : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-<<<<<<< HEAD:app/src/main/java/com/example/cs402_final/SearchResultsFragment.kt
         searchRecyclerView = view.findViewById<RecyclerView>(R.id.search_recycler_view)
         searchRecyclerView.layoutManager = LinearLayoutManager(this.context)
 
@@ -80,30 +79,30 @@ class SearchResults : Fragment() {
 //            ItemData(2, "abc", "Test Item 2", 9.99,5.00,20),
 //            ItemData(3, "abc","Test Item 3", 9.99,5.00,20),
 //            ItemData(4, "abc","Test Item 4", 9.99,5.00,20))
-=======
+
 
         if(fragType.equals("search")) {
             searchRecyclerView = view.findViewById<RecyclerView>(R.id.search_recycler_view)
             searchRecyclerView.layoutManager = LinearLayoutManager(this.context)
->>>>>>> main:app/src/main/java/com/example/cs402_final/fragments/SearchResultsFragment.kt
+
 //
             this.context.let {
 //            val searchAdapter: SearchAdapter = SearchAdapter()
-<<<<<<< HEAD:app/src/main/java/com/example/cs402_final/SearchResultsFragment.kt
+
             //resultList = emptyList()
             val searchAdapter: SearchAdapter  = SearchAdapter(it!!, resultList)
 
             searchRecyclerView.adapter = searchAdapter;
 
             // Set up item model
-            mItemModel = ViewModelProvider(this).get(ItemViewModel::class.java)
-            mItemModel.allItems.observe(this, Observer { item ->
-                searchAdapter.setData(item as ArrayList<Item>)
-            })
-=======
+//            mItemModel = ViewModelProvider(this).get(ItemViewModel::class.java)
+//            mItemModel.allItems.observe(this, Observer { item ->
+//                searchAdapter.setData(item as LiveData<List<Item>>)
+//            })
+
                 //resultList = emptyList()
-                val searchAdapter: SearchAdapter = SearchAdapter(it!!, resultList)
-                searchRecyclerView.adapter = searchAdapter;
+//                val searchAdapter: SearchAdapter = SearchAdapter(it!!, resultList)
+//                searchRecyclerView.adapter = searchAdapter;
 
                 // Set up item model
 //            mItemModel = ViewModelProvider(this).get(ItemModel::class.java)
@@ -113,7 +112,7 @@ class SearchResults : Fragment() {
             }
         } else if(fragType.equals("update")) {
             //TODO: init recyclerview for updating quantities
->>>>>>> main:app/src/main/java/com/example/cs402_final/fragments/SearchResultsFragment.kt
+
         }
 
 

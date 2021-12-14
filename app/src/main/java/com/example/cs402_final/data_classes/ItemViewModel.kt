@@ -1,5 +1,6 @@
-package com.example.cs402_final
+package com.example.cs402_final.data_classes
 
+import androidx.appcompat.view.menu.MenuView
 import androidx.lifecycle.*
 import kotlinx.coroutines.launch
 
@@ -10,7 +11,9 @@ class ItemViewModel(private val repository: ItemRepository) : ViewModel() {
     //   the UI when the data actually changes.
     // - Repository is completely separated from the UI through the ViewModel.
 
-    val allItems: LiveData<List<Item>> = repository.readAllData.asLiveData()
+    val allItems: LiveData<List<Item>> by lazy {
+        repository.readAllData
+    }
 
     // Launch new coroutine to unsert data in a nonblocking way
 

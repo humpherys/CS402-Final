@@ -2,15 +2,15 @@ package com.example.cs402_final.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-<<<<<<< HEAD:app/src/main/java/com/example/cs402_final/ItemSearchActivity.kt
 import androidx.activity.viewModels
-=======
 import androidx.core.os.bundleOf
->>>>>>> main:app/src/main/java/com/example/cs402_final/activities/ItemSearchActivity.kt
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import com.example.cs402_final.ItemData
 import com.example.cs402_final.R
+import com.example.cs402_final.data_classes.ItemViewModel
+import com.example.cs402_final.data_classes.ItemViewModelFactory
+import com.example.cs402_final.data_classes.ItemsApplication
 import com.example.cs402_final.fragments.SearchResults
 import com.google.android.material.textfield.TextInputEditText
 

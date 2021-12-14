@@ -20,12 +20,8 @@ import kotlinx.parcelize.Parcelize
 //This should be expanded to hold all of the data we need to display an item, either on search or on
 //the add/edit item screen
 
-<<<<<<< HEAD:app/src/main/java/com/example/cs402_final/ItemModel.kt
 @DatabaseView("SELECT * FROM items")
-=======
-@DatabaseView()
 @Parcelize
->>>>>>> main:app/src/main/java/com/example/cs402_final/data_classes/ItemModel.kt
 data class ItemData(var id: Int,
                     var code: String,
                     var name: String,
@@ -40,7 +36,7 @@ data class ItemData(var id: Int,
 
 class ItemModel(application: Application): AndroidViewModel(application) {
 
-    val readAllData: Flow<List<Item>>
+    val readAllData: LiveData<List<Item>>
     private val repository: ItemRepository
 
     init {

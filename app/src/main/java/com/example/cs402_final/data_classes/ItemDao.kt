@@ -2,11 +2,8 @@ package com.example.cs402_final.data_classes
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-<<<<<<< HEAD:app/src/main/java/com/example/cs402_final/ItemDao.kt
 import kotlinx.coroutines.flow.Flow
-=======
 import com.example.cs402_final.data_classes.Item
->>>>>>> main:app/src/main/java/com/example/cs402_final/data_classes/ItemDao.kt
 
 /**
  * This is class to interact with the database. Contains functions to make it easier to get and add data
@@ -22,7 +19,7 @@ interface ItemDao {
 //    fun insertItemShort(itemCode: String, itemName: String, itemPrice : Double)
 
     @Query("SELECT * FROM items ORDER BY rowid ASC")
-    fun getAll(): Flow<List<Item>>
+    fun getAll(): LiveData<List<Item>>
 
 
     @Query("SELECT * FROM items WHERE item_name LIKE :search")

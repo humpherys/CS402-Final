@@ -1,6 +1,7 @@
-package com.example.cs402_final
+package com.example.cs402_final.data_classes
 
 import android.app.Application
+import com.example.cs402_final.ItemDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 
