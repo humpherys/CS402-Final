@@ -10,11 +10,12 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.flow.Flow
 
-public class SearchAdapter(context: Context, var results: ArrayList<ItemData>)
+public class SearchAdapter(context: Context, var results: ArrayList<Item>)
     : RecyclerView.Adapter<SearchAdapter.ResultsHolder>() {
 
-//    private var itemList = emptyList<Item>()
+    //    private var itemList = emptyList<Item>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
             : SearchAdapter.ResultsHolder {
@@ -32,7 +33,7 @@ public class SearchAdapter(context: Context, var results: ArrayList<ItemData>)
             titleTextView.text = item.itemName
             titleTextView.setOnClickListener {
                 val addIntent = Intent(itemView.context, ItemActivity::class.java)
-                addIntent.putExtra("item", item)
+//                addIntent.putExtra("item", item)
                 addIntent.putExtra("origin", "search")
                 startActivity(itemView.context, addIntent, null)
             }

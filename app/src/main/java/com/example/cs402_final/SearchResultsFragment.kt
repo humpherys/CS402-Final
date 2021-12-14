@@ -28,7 +28,7 @@ class SearchResults : Fragment() {
     private var param2: String? = null
 
     private lateinit var searchRecyclerView: RecyclerView
-    private lateinit var resultList : List<Item>
+    private lateinit var resultList : ArrayList<Item>
     lateinit var res : LiveData<List<Item>>
 
     // add our ItemModel
@@ -66,11 +66,13 @@ class SearchResults : Fragment() {
         searchRecyclerView = view.findViewById<RecyclerView>(R.id.search_recycler_view)
         searchRecyclerView.layoutManager = LinearLayoutManager(this.context)
 
+        var item = Item(0, "TEST", "Hammer Test", 15.00, 5.00, 5, "TST", "Test Hammer1", "item_loc", "item_upc", "item_img")
+
         //TODO: This needs to be removed once we get the db working
-        resultList = arrayListOf<ItemData>(ItemData(1, "abc","Test Item 1", 9.99,5.00,20),
-            ItemData(2, "abc","Test Item 2", 9.99,5.00,20),
-            ItemData(3, "abc","Test Item 3", 9.99,5.00,20),
-            ItemData(4, "abc","Test Item 4", 9.99,5.00,20))
+        resultList = arrayListOf<Item>(Item())
+//            ItemData(2, "abc", "Test Item 2", 9.99,5.00,20),
+//            ItemData(3, "abc","Test Item 3", 9.99,5.00,20),
+//            ItemData(4, "abc","Test Item 4", 9.99,5.00,20))
 //
         this.context.let {
 //            val searchAdapter: SearchAdapter = SearchAdapter()

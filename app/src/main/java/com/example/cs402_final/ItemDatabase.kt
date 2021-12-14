@@ -73,20 +73,20 @@ abstract class ItemDatabase : RoomDatabase() {
         }
 
         // gets instance of Room and adds it if it does not exist
-//        fun getInstance(context: Context): ItemDatabase {
-//            synchronized(this){
-//                var instance = INSTANCE
-//
-//                if (instance == null) {
-//                    instance = Room.databaseBuilder(
-//                        context.applicationContext,
-//                        ItemDatabase::class.java,
-//                        "inventory_database"
-//                    ).fallbackToDestructiveMigration().build()
-//                    INSTANCE = instance
-//                }
-//                return instance
-//            }
-//        }
+        fun getInstance(context: Context): ItemDatabase {
+            synchronized(this){
+                var instance = INSTANCE
+
+                if (instance == null) {
+                    instance = Room.databaseBuilder(
+                        context.applicationContext,
+                        ItemDatabase::class.java,
+                        "inventory_database"
+                    ).fallbackToDestructiveMigration().build()
+                    INSTANCE = instance
+                }
+                return instance
+            }
+        }
     }
 }

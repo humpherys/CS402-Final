@@ -47,6 +47,4 @@ class SearchListAdapter: RecyclerView.Adapter<SearchListAdapter.ResultsHolder>()
         this.itemList = item
         notifyDataSetChanged()
     }
-
-
 }
