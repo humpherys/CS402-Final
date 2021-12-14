@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,6 +23,9 @@ class TagFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private lateinit var tagRecyclerView: RecyclerView
+    private lateinit var tagList: ArrayList<TagData>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -35,6 +40,27 @@ class TagFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_tag, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        tagRecyclerView = view.findViewById<RecyclerView>(R.id.tag_recycler_view)
+        tagRecyclerView.layoutManager = LinearLayoutManager(this.context)
+
+        //TODO: This needs to be removed once we get the db working
+        tagList = arrayListOf<TagData>(
+            TagData("Tag1"),
+            TagData("Tag2"),
+            TagData("Tag3"),
+            TagData("Tag4")
+        )
+
+        this.context.let {
+            val tagAdapter: TagAdapter = TagAdapter(it!!, tagList)
+            tagRecyclerView.adapter = tagAdapter;
+        }
+
+
     }
 
     companion object {
