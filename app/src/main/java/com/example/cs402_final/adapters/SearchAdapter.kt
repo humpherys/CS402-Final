@@ -1,16 +1,20 @@
-package com.example.cs402_final
+package com.example.cs402_final.adapters
 
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
-import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
+<<<<<<< HEAD:app/src/main/java/com/example/cs402_final/SearchAdapter.kt
 import kotlinx.coroutines.flow.Flow
+=======
+import com.example.cs402_final.activities.ItemActivity
+import com.example.cs402_final.ItemData
+import com.example.cs402_final.R
+>>>>>>> main:app/src/main/java/com/example/cs402_final/adapters/SearchAdapter.kt
 
 public class SearchAdapter(context: Context, var results: ArrayList<Item>)
     : RecyclerView.Adapter<SearchAdapter.ResultsHolder>() {
@@ -18,7 +22,7 @@ public class SearchAdapter(context: Context, var results: ArrayList<Item>)
     //    private var itemList = emptyList<Item>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
-            : SearchAdapter.ResultsHolder {
+            : ResultsHolder {
         val view = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_item_view, parent, false)
 
         return ResultsHolder(view)

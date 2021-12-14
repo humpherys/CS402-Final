@@ -1,8 +1,12 @@
-package com.example.cs402_final
+package com.example.cs402_final.data_classes
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+<<<<<<< HEAD:app/src/main/java/com/example/cs402_final/ItemDao.kt
 import kotlinx.coroutines.flow.Flow
+=======
+import com.example.cs402_final.data_classes.Item
+>>>>>>> main:app/src/main/java/com/example/cs402_final/data_classes/ItemDao.kt
 
 /**
  * This is class to interact with the database. Contains functions to make it easier to get and add data

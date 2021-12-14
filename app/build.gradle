@@ -1,7 +1,11 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+<<<<<<< HEAD
     id 'kotlin-kapt'
+=======
+    id 'kotlin-parcelize'
+>>>>>>> main
 }
 
 android {

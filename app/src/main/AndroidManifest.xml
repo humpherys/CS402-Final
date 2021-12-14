@@ -22,16 +22,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CS402Final">
         <activity
-            android:name=".TagActivity"
+            android:name=".activities.TagActivity"
             android:exported="false" />
         <activity
-            android:name=".ItemActivity"
+            android:name=".activities.ItemActivity"
             android:exported="false" />
         <activity
-            android:name=".ItemSearchActivity"
+            android:name=".activities.ItemSearchActivity"
             android:exported="false" />
         <activity
-            android:name=".ScanActivity"
+            android:name=".activities.ScanActivity"
             android:exported="false" />
 
         <meta-data
@@ -39,7 +39,7 @@
             android:value="barcode" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
