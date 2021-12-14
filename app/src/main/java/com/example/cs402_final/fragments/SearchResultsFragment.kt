@@ -69,7 +69,7 @@ class SearchResults : Fragment() {
             if(fragType.equals("search")) {
                 val searchAdapter: SearchAdapter = SearchAdapter(it!!, resultList)
                 searchRecyclerView.adapter = searchAdapter
-            } else if(fragType.equals("update")) {
+            } else if(fragType.equals("update") || fragType.equals("tagManage")) {
                 val updateAdapter: UpdateAdapter = UpdateAdapter(it!!, resultList)
                 searchRecyclerView.adapter = updateAdapter
             }

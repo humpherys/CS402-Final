@@ -10,10 +10,15 @@ import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import com.example.cs402_final.ItemData
 import com.example.cs402_final.R
+import com.example.cs402_final.adapters.TagData
 import com.example.cs402_final.fragments.SearchResults
 import com.google.android.material.textfield.TextInputEditText
 
 class ItemSearchActivity : AppCompatActivity() {
+
+    var action : String? = null
+    var managingTag : TagData? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_search)
@@ -26,7 +31,9 @@ class ItemSearchActivity : AppCompatActivity() {
         )
 
         val extras = intent.extras
-        val action = extras?.getString("action")
+        action = extras?.getString("action")
+        managingTag = extras?.getParcelable<TagData>("tag")
+
         val confirmButton = findViewById<Button>(R.id.ConfirmButton)
         if(action.equals("update")) {
             confirmButton.visibility = View.VISIBLE
@@ -41,6 +48,21 @@ class ItemSearchActivity : AppCompatActivity() {
                 }
                 updateIntent.putExtra("items", selectedItems)
                 startActivity(updateIntent)
+            }
+        } else if(action.equals("tagManage")) {
+            confirmButton.visibility = View.VISIBLE
+
+            //TODO: Select any items that already have the managingTag applied
+
+            confirmButton.setOnClickListener {
+                var selectedItems = ArrayList<ItemData>()
+                for(item in resultList) {
+                    if(item.selected != null && item.selected == true) {
+                        selectedItems.add(item)
+                    }
+                }
+
+                //TODO: Logic to save all of the selected items with the managingTag
             }
         }
 
