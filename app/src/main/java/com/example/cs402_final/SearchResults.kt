@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,7 +28,8 @@ class SearchResults : Fragment() {
     private var param2: String? = null
 
     private lateinit var searchRecyclerView: RecyclerView
-    private lateinit var resultList : ArrayList<ItemData>
+    private lateinit var resultList : List<Item>
+    lateinit var res : LiveData<List<Item>>
 
     // add our ItemModel
     private lateinit var mItemModel: ItemModel
@@ -38,6 +41,10 @@ class SearchResults : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
 
+        val itemObserver = Observer<LiveData<List<Item>>> {
+            newName -> res = newName
+        }
+
     }
 
     override fun onCreateView(
@@ -45,30 +52,41 @@ class SearchResults : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        //val view = inflater.inflate(R.layout.fragment_search_results, container, false)
-
-
+        val view = inflater.inflate(R.layout.fragment_search_results, container, false)
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search_results, container, false)
+        // return inflater.inflate(R.layout.fragment_search_results, container, false)
+
+
+
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         searchRecyclerView = view.findViewById<RecyclerView>(R.id.search_recycler_view)
         searchRecyclerView.layoutManager = LinearLayoutManager(this.context)
-        resultList = arrayListOf<ItemData>(ItemData(1, "abc","Test Item 1", 9.99,5.00,20),
-            ItemData(2, "abc","Test Item 2", 9.99,5.00,20),
-            ItemData(3, "abc","Test Item 3", 9.99,5.00,20),
-            ItemData(4, "abc","Test Item 4", 9.99,5.00,20))
+
+
+        /**
+         * This is used for the ArrayList implementation Mason did
+         */
+//        resultList = arrayListOf<ItemData>(ItemData(1, "abc","Test Item 1", 9.99,5.00,20),
+//            ItemData(2, "abc","Test Item 2", 9.99,5.00,20),
+//            ItemData(3, "abc","Test Item 3", 9.99,5.00,20),
+//            ItemData(4, "abc","Test Item 4", 9.99,5.00,20))
 //
+        // Set up item model
+        mItemModel = ViewModelProvider(this).get(ItemModel::class.java)
+
+        resultList = mItemModel.readAllData
+
         this.context.let {
-//            val searchAdapter: SearchAdapter = SearchAdapter()
-            //resultList = emptyList()
+//            val searchAdapter: SearchListAdapter = SearchListAdapter()
+//            resultList = emptyList()
             val searchAdapter: SearchAdapter  = SearchAdapter(it!!, resultList)
+
             searchRecyclerView.adapter = searchAdapter;
 
-            // Set up item model
-//            mItemModel = ViewModelProvider(this).get(ItemModel::class.java)
 //            mItemModel.readAllData.observe(this, Observer { item ->
 //                searchAdapter.setData(item)
 //            })

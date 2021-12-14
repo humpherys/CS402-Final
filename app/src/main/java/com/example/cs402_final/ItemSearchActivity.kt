@@ -19,6 +19,8 @@ class ItemSearchActivity : AppCompatActivity() {
         }
 
 
+
+
         val searchInput = findViewById<TextInputEditText>(R.id.SearchBoxText)
         searchInput.setOnEditorActionListener { textView, i, keyEvent ->
             if(true /*conditions here*/) {
