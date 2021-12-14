@@ -1,5 +1,6 @@
 package com.example.cs402_final.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -17,21 +18,35 @@ class ItemSearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_search)
 
+        var resultList = arrayListOf<ItemData>(
+            ItemData(1, "abc","Test Item 1", 9.99,5.00,20),
+            ItemData(2, "abc","Test Item 2", 9.99,5.00,20),
+            ItemData(3, "abc","Test Item 3", 9.99,5.00,20),
+            ItemData(4, "abc","Test Item 4", 9.99,5.00,20)
+        )
+
         val extras = intent.extras
         val action = extras?.getString("action")
         val confirmButton = findViewById<Button>(R.id.ConfirmButton)
         if(action.equals("update")) {
             confirmButton.visibility = View.VISIBLE
+
+            confirmButton.setOnClickListener {
+                var updateIntent = Intent(this, QuantityUpdateActivity::class.java)
+                var selectedItems = ArrayList<ItemData>()
+                for(item in resultList) {
+                    if(item.selected != null && item.selected == true) {
+                        selectedItems.add(item)
+                    }
+                }
+                updateIntent.putExtra("items", selectedItems)
+                startActivity(updateIntent)
+            }
         }
 
         if (savedInstanceState == null) {
             supportFragmentManager.commit {
-                var resultList = arrayListOf<ItemData>(
-                    ItemData(1, "abc","Test Item 1", 9.99,5.00,20),
-                    ItemData(2, "abc","Test Item 2", 9.99,5.00,20),
-                    ItemData(3, "abc","Test Item 3", 9.99,5.00,20),
-                    ItemData(4, "abc","Test Item 4", 9.99,5.00,20)
-                )
+
                 val bundle = bundleOf(
                     "fragType" to (action ?: "search"),
                     "results" to resultList
