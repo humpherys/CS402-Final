@@ -53,26 +53,25 @@ class SearchResults : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        searchRecyclerView = view.findViewById<RecyclerView>(R.id.search_recycler_view)
-        searchRecyclerView.layoutManager = LinearLayoutManager(this.context)
 
-        //TODO: This needs to be removed once we get the db working
-//        resultList = arrayListOf<ItemData>(ItemData(1, "abc","Test Item 1", 9.99,5.00,20),
-//            ItemData(2, "abc","Test Item 2", 9.99,5.00,20),
-//            ItemData(3, "abc","Test Item 3", 9.99,5.00,20),
-//            ItemData(4, "abc","Test Item 4", 9.99,5.00,20))
+        if(fragType.equals("search")) {
+            searchRecyclerView = view.findViewById<RecyclerView>(R.id.search_recycler_view)
+            searchRecyclerView.layoutManager = LinearLayoutManager(this.context)
 //
-        this.context.let {
+            this.context.let {
 //            val searchAdapter: SearchAdapter = SearchAdapter()
-            //resultList = emptyList()
-            val searchAdapter: SearchAdapter  = SearchAdapter(it!!, resultList)
-            searchRecyclerView.adapter = searchAdapter;
+                //resultList = emptyList()
+                val searchAdapter: SearchAdapter = SearchAdapter(it!!, resultList)
+                searchRecyclerView.adapter = searchAdapter;
 
-            // Set up item model
+                // Set up item model
 //            mItemModel = ViewModelProvider(this).get(ItemModel::class.java)
 //            mItemModel.readAllData.observe(this, Observer { item ->
 //                searchAdapter.setData(item)
 //            })
+            }
+        } else if(fragType.equals("update")) {
+            //TODO: init recyclerview for updating quantities
         }
 
 
