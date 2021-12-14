@@ -12,8 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val ARG_FRAG = "fragType"
 
 /**
  * A simple [Fragment] subclass.
@@ -22,8 +21,8 @@ private const val ARG_PARAM2 = "param2"
  */
 class SearchResults : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var fragType: String? = null
+
 
     private lateinit var searchRecyclerView: RecyclerView
     private lateinit var resultList : ArrayList<ItemData>
@@ -34,8 +33,8 @@ class SearchResults : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            fragType = it.getString(ARG_FRAG)
+            resultList = it.getParcelableArrayList<ItemData>("results") as ArrayList<ItemData>
         }
 
     }
@@ -58,10 +57,10 @@ class SearchResults : Fragment() {
         searchRecyclerView.layoutManager = LinearLayoutManager(this.context)
 
         //TODO: This needs to be removed once we get the db working
-        resultList = arrayListOf<ItemData>(ItemData(1, "abc","Test Item 1", 9.99,5.00,20),
-            ItemData(2, "abc","Test Item 2", 9.99,5.00,20),
-            ItemData(3, "abc","Test Item 3", 9.99,5.00,20),
-            ItemData(4, "abc","Test Item 4", 9.99,5.00,20))
+//        resultList = arrayListOf<ItemData>(ItemData(1, "abc","Test Item 1", 9.99,5.00,20),
+//            ItemData(2, "abc","Test Item 2", 9.99,5.00,20),
+//            ItemData(3, "abc","Test Item 3", 9.99,5.00,20),
+//            ItemData(4, "abc","Test Item 4", 9.99,5.00,20))
 //
         this.context.let {
 //            val searchAdapter: SearchAdapter = SearchAdapter()
@@ -93,8 +92,7 @@ class SearchResults : Fragment() {
         fun newInstance(param1: String, param2: String) =
             SearchResults().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putString(ARG_FRAG, fragType)
                 }
             }
     }

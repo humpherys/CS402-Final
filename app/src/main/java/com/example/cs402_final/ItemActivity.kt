@@ -166,7 +166,7 @@ class ItemActivity : AppCompatActivity() {
 //            false
 //        }
 
-        val itemName = extras?.getSerializable("item")
+        val itemName = extras?.getParcelable<ItemData>("item")
         if(itemName is ItemData) {
             displayedItem = itemName
 
