@@ -2,6 +2,8 @@ package com.example.cs402_final.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
 import androidx.core.os.bundleOf
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
@@ -16,9 +18,14 @@ class ItemSearchActivity : AppCompatActivity() {
         setContentView(R.layout.activity_item_search)
 
         val extras = intent.extras
+        val action = extras?.getString("action")
+        val confirmButton = findViewById<Button>(R.id.ConfirmButton)
+        if(action.equals("update")) {
+            confirmButton.visibility = View.VISIBLE
+        }
+
         if (savedInstanceState == null) {
             supportFragmentManager.commit {
-                val action = extras?.getString("action")
                 var resultList = arrayListOf<ItemData>(
                     ItemData(1, "abc","Test Item 1", 9.99,5.00,20),
                     ItemData(2, "abc","Test Item 2", 9.99,5.00,20),
