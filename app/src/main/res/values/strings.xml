@@ -2,4 +2,9 @@
     <string name="app_name">CS402-Final</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="update_options">
+        <item>Set</item>
+        <item>Increase</item>
+        <item>Decrease</item>
+    </string-array>
 </resources>

@@ -21,6 +21,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CS402Final">
         <activity
+            android:name=".activities.QuantityUpdateActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.TagActivity"
             android:exported="false" />
         <activity

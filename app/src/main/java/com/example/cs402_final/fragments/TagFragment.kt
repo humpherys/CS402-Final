@@ -1,5 +1,6 @@
 package com.example.cs402_final.fragments
 
+import android.nfc.Tag
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,14 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.cs402_final.ItemData
 import com.example.cs402_final.R
 import com.example.cs402_final.adapters.TagAdapter
 import com.example.cs402_final.adapters.TagData
 
-// TODO: Rename parameter arguments, choose names that match
+
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val ARG_FRAG = "fragType"
+private const val ARG_LIST = "tags"
 
 /**
  * A simple [Fragment] subclass.
@@ -23,8 +25,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class TagFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var fragType: String? = null
 
     private lateinit var tagRecyclerView: RecyclerView
     private lateinit var tagList: ArrayList<TagData>
@@ -32,8 +33,10 @@ class TagFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            fragType = it.getString(ARG_FRAG)
+            tagList = it.getParcelableArrayList<TagData>(ARG_LIST) as ArrayList<TagData>
+        } ?: run {
+            tagList = ArrayList<TagData>()
         }
     }
 
@@ -50,13 +53,13 @@ class TagFragment : Fragment() {
         tagRecyclerView = view.findViewById<RecyclerView>(R.id.tag_recycler_view)
         tagRecyclerView.layoutManager = LinearLayoutManager(this.context)
 
-        //TODO: This needs to be removed once we get the db working
-        tagList = arrayListOf<TagData>(
-            TagData("Tag1"),
-            TagData("Tag2"),
-            TagData("Tag3"),
-            TagData("Tag4")
-        )
+//
+//        tagList = arrayListOf<TagData>(
+//            TagData("Tag1"),
+//            TagData("Tag2"),
+//            TagData("Tag3"),
+//            TagData("Tag4")
+//        )
 
         this.context.let {
             val tagAdapter: TagAdapter = TagAdapter(it!!, tagList)
@@ -80,8 +83,8 @@ class TagFragment : Fragment() {
         fun newInstance(param1: String, param2: String) =
             TagFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putString(ARG_FRAG, fragType)
+                    putParcelableArrayList(ARG_LIST, tagList)
                 }
             }
     }
