@@ -19,11 +19,14 @@ interface ItemDao {
 //    fun insertItemShort(itemCode: String, itemName: String, itemPrice : Double)
 
     @Query("SELECT * FROM items ORDER BY rowid ASC")
-    fun getAll(): LiveData<List<Item>>
+    fun getAll(): Flow<List<Item>>
 
 
     @Query("SELECT * FROM items WHERE item_name LIKE :search ORDER BY item_name ASC")
-    fun findItemByName(search: String) : LiveData<List<Item>>
+    fun findItemByName(search: String) : Flow<List<Item>>
+
+    @Query("SELECT * FROM items WHERE item_code LIKE :tag")
+    fun findByTag(tag: String): Flow<List<Item>>
 
 //    @Query("INSERT INTO items (item_code, item_name, item_price, item_cost, item_description, item_qty, item_vendor_code, item_loc, item_upc) values (:itemCode, :itemName, :itemPrice, :itemCost, :itemDesc, :itemQty,:itemVendor, :itemShelf, :itemUPC)")
 //    fun insertItemLong(itemCode: String, itemName: String, itemPrice : Double, itemCost: Double, itemDesc: String, itemQty: Int, itemVendor : String, itemShelf : String, itemUPC : String)

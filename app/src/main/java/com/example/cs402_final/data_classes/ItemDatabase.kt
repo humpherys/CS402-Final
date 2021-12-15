@@ -35,7 +35,7 @@ abstract class ItemDatabase : RoomDatabase() {
                     // Clean database of all entries
                     // This will be commented out in the future when we want to have data stored across sessions
 //                    itemDao.deleteAll()
-                    for(i in 0 until 5){
+                    for(i in 1..5){
                         // use 0 as index so it will autogenerate
                         var inItem = Item(0, "TEST$i", "Hammer 1 Test$i", 15.00 + i, 5.00 + i, 5 + i, "TST$i", "Test Hammer$i", "item_loc$i", "item_upc$i")
                         itemDao.insertItems(inItem)

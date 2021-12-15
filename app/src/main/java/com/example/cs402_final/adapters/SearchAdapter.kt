@@ -16,7 +16,7 @@ import com.example.cs402_final.ItemData
 import com.example.cs402_final.R
 import com.example.cs402_final.data_classes.Item
 
-public class SearchAdapter(context: Context, var results: ArrayList<Item>)
+public class SearchAdapter(context: Context, var results: ArrayList<ItemData>)
     : RecyclerView.Adapter<SearchAdapter.ResultsHolder>() {
 
     //    private var itemList = emptyList<Item>()
@@ -35,7 +35,7 @@ public class SearchAdapter(context: Context, var results: ArrayList<Item>)
         val item = results[position]
 
         holder.apply {
-            titleTextView.text = item.itemName
+            titleTextView.text = item.name
             titleTextView.setOnClickListener {
                 val addIntent = Intent(itemView.context, ItemActivity::class.java)
 //                addIntent.putExtra("item", item)
@@ -43,14 +43,13 @@ public class SearchAdapter(context: Context, var results: ArrayList<Item>)
                 startActivity(itemView.context, addIntent, null)
             }
         }
-
     }
 
     class ResultsHolder(view: View) : RecyclerView.ViewHolder(view) {
         val titleTextView: TextView = view.findViewById(R.id.item_name)
     }
 //
-    fun setData(item: ArrayList<Item>){
+    fun setData(item: ArrayList<ItemData>){
         this.results = item
         notifyDataSetChanged()
     }

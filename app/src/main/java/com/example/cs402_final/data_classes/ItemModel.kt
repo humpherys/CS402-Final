@@ -4,6 +4,7 @@ import android.app.Application
 import android.os.Parcelable
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.room.DatabaseView
 import com.example.cs402_final.data_classes.Item
@@ -31,7 +32,8 @@ data class ItemData(var id: Int,
                     var vendor: String? = null,
                     var description: String? = null,
                     var shelf: String? = null,
-                    var upc: String? = null
+                    var upc: String? = null,
+                    var selected: Boolean? = null
 ) : Parcelable
 
 class ItemModel(application: Application): AndroidViewModel(application) {
@@ -45,7 +47,7 @@ class ItemModel(application: Application): AndroidViewModel(application) {
 
         val itemDao = ItemDatabase.getInstance(application).itemDao()
         repository = ItemRepository(itemDao)
-        readAllData = repository.readAllData
+        readAllData = repository.readAllItems().asLiveData()
     }
 
     fun addItem(item: Item){

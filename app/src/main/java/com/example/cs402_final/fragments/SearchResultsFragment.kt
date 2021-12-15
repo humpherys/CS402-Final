@@ -35,7 +35,7 @@ class SearchResults : Fragment() {
 
 
     private lateinit var searchRecyclerView: RecyclerView
-    private lateinit var resultList : ArrayList<Item>
+    private lateinit var resultList : ArrayList<ItemData>
     lateinit var res : LiveData<List<Item>>
 
     // add our ItemModel
@@ -59,9 +59,14 @@ class SearchResults : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search_results, container, false)
+        val view = inflater.inflate(R.layout.fragment_search_results, container, false)
         // Inflate the layout for this fragment
         // return inflater.inflate(R.layout.fragment_search_results, container, false)
+
+        val adapter = ItemListAdapter()
+        val recyclerView = view.findViewById<View>(R.id.searchContainerView)
+
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -69,8 +74,6 @@ class SearchResults : Fragment() {
         searchRecyclerView = view.findViewById<RecyclerView>(R.id.search_recycler_view)
         searchRecyclerView.layoutManager = LinearLayoutManager(this.context)
 
-        var item = Item(0, "TEST", "Hammer Test", 15.00, 5.00, 5, "TST", "Test Hammer1", "item_loc", "item_upc")
-        mItemModel.insert(item)
         /**
          * Jacob below
          */
@@ -79,14 +82,14 @@ class SearchResults : Fragment() {
 
         // Mason below
         //TODO: This needs to be removed once we get the db working
-        resultList = arrayListOf<Item>(item)
+//        resultList = arrayListOf<Item>(item)
 //            ItemData(2, "abc", "Test Item 2", 9.99,5.00,20),
 //            ItemData(3, "abc","Test Item 3", 9.99,5.00,20),
 //            ItemData(4, "abc","Test Item 4", 9.99,5.00,20))
 
 
         if(fragType.equals("search")) {
-            searchRecyclerView = view.findViewById<RecyclerView>(R.id.search_recycler_view)
+            searchRecyclerView = view.findViewById(R.id.search_recycler_view)
             searchRecyclerView.layoutManager = LinearLayoutManager(this.context)
 
 //
@@ -96,7 +99,7 @@ class SearchResults : Fragment() {
                 // Jacob Below
                 res = mItemModel.allItems
 
-                val itemListAdapter = ItemListAdapter(it!!, res)
+                val itemListAdapter = ItemListAdapter()
                 searchRecyclerView.adapter = itemListAdapter
                 mItemModel = ViewModelProvider(this).get(ItemViewModel::class.java)
 

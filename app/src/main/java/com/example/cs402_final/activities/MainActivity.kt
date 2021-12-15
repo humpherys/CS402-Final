@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
 
         searchButton.setOnClickListener {
             val intent = Intent(this@MainActivity, ItemSearchActivity::class.java)
+            intent.putExtra("action", "search")
             startActivity(intent)
         }
 
@@ -57,6 +58,13 @@ class MainActivity : AppCompatActivity() {
         tagButton.setOnClickListener {
             val tagIntent = Intent(this, TagActivity::class.java)
             startActivity(tagIntent)
+        }
+
+        val updateButton = findViewById<Button>(R.id.button4)
+        updateButton.setOnClickListener {
+            val updateIntent = Intent(this, ItemSearchActivity::class.java)
+            updateIntent.putExtra("action", "update")
+            startActivity(updateIntent)
         }
 
     }
