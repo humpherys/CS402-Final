@@ -1,20 +1,14 @@
 package com.example.cs402_final.fragments
 
-import android.content.ReceiverCallNotAllowedException
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cs402_final.ItemData
-import com.example.cs402_final.ItemListAdapter
-import com.example.cs402_final.ItemModel
 import com.example.cs402_final.R
 import com.example.cs402_final.adapters.SearchAdapter
 import com.example.cs402_final.data_classes.Item
@@ -38,8 +32,8 @@ class SearchResults : Fragment() {
     private lateinit var resultList : ArrayList<ItemData>
     lateinit var res : LiveData<List<Item>>
 
-    // add our ItemModel
-    private lateinit var mItemModel: ItemViewModel
+    // add our ItemViewModel
+    private lateinit var mItemViewModel: ItemViewModel
 
 //    override fun onCreate(savedInstanceState: Bundle?) {
 //        super.onCreate(savedInstanceState)
@@ -59,59 +53,56 @@ class SearchResults : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_search_results, container, false)
         // Inflate the layout for this fragment
         // return inflater.inflate(R.layout.fragment_search_results, container, false)
 
-        val adapter = ItemListAdapter()
-        val recyclerView = view.findViewById<View>(R.id.searchContainerView)
-
-        return view
+        return inflater.inflate(R.layout.fragment_search_results, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        searchRecyclerView = view.findViewById<RecyclerView>(R.id.search_recycler_view)
-        searchRecyclerView.layoutManager = LinearLayoutManager(this.context)
-
-        /**
-         * Jacob below
-         */
-
-
-
+//        searchRecyclerView = view.findViewById(R.id.search_recycler_view)
+//        searchRecyclerView.layoutManager = LinearLayoutManager(this.context)
         // Mason below
         //TODO: This needs to be removed once we get the db working
-//        resultList = arrayListOf<Item>(item)
-//            ItemData(2, "abc", "Test Item 2", 9.99,5.00,20),
-//            ItemData(3, "abc","Test Item 3", 9.99,5.00,20),
-//            ItemData(4, "abc","Test Item 4", 9.99,5.00,20))
 
 
         if(fragType.equals("search")) {
             searchRecyclerView = view.findViewById(R.id.search_recycler_view)
             searchRecyclerView.layoutManager = LinearLayoutManager(this.context)
 
+            // TODO For DB
+            // val adapter = ItemListAdapter()
+
 //
             this.context.let {
-//            val searchAdapter: SearchAdapter = SearchAdapter()
-
                 // Jacob Below
-                res = mItemModel.allItems
+                // TODO DB
+                // Get our list of items from DB
+                //res = mItemModel.allItems
 
-                val itemListAdapter = ItemListAdapter()
-                searchRecyclerView.adapter = itemListAdapter
-                mItemModel = ViewModelProvider(this).get(ItemViewModel::class.java)
 
-                res.observe(viewLifecycleOwner, Observer { itemOb ->
-                    itemListAdapter.setData(itemOb)
-                })
+                // Create new adapter to put items into
+                // Sending in res, which is live data is going to cause an error with getItemCount function
+//                val itemListAdapter = ItemListAdapter(it!!, res)
+//                searchRecyclerView.adapter = itemListAdapter
+//                mItemModel = ViewModelProvider(this).get(ItemViewModel::class.java)
+//
+//                res.observe(viewLifecycleOwner, Observer { itemOb ->
+//                    itemListAdapter.setData(itemOb)
+//                })
 
 
                 //resultList = emptyList()
 
                 //Mason below
-                val searchAdapter: SearchAdapter  = SearchAdapter(it!!, resultList)
+                resultList = arrayListOf<ItemData>(
+                    ItemData(2, "abc", "Test Item 2", 9.99,5.00,20),
+                    ItemData(3, "abc","Test Item 3", 9.99,5.00,20),
+                    ItemData(4, "abc","Test Item 4", 9.99,5.00,20))
+
+
+                val searchAdapter = SearchAdapter(it!!, resultList)
 
                 searchRecyclerView.adapter = searchAdapter;
 

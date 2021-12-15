@@ -38,16 +38,19 @@ class ItemSearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_search)
 
-        val recyclerView = findViewById<RecyclerView>(R.id.searchContainerView)
-        val adapter = ItemListAdapter()
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
-
-        // add observer
-        itemViewModel.allItems.observe(this) { items ->
-            items.let { adapter.setData(it) }
-
-        }
+        // TODO DB
+        // We have a fragment, not a recyclerview
+//        val recyclerView = findViewById<RecyclerView>(R.id.searchContainerView)
+//        val adapter = ItemListAdapter()
+//        recyclerView.adapter = adapter
+//        recyclerView.layoutManager = LinearLayoutManager(this)
+//
+//        // add observer
+//        itemViewModel.allItems.observe(this) { items ->
+//            items.let { adapter.setData(it) }
+//
+//        }
+        // TODO END , possibly delete
 
         var resultList = arrayListOf<ItemData>(
             ItemData(1, "abc","Test Item 1", 9.99,5.00,20),
