@@ -1,9 +1,28 @@
 package com.example.cs402_final.data_classes
 
+import android.os.Parcelable
 import androidx.appcompat.view.menu.MenuView
 import androidx.lifecycle.*
+import androidx.room.DatabaseView
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import kotlinx.parcelize.Parcelize
+
+
+@DatabaseView("SELECT * FROM items")
+@Parcelize
+data class ItemData(var id: Int,
+                    var code: String,
+                    var name: String,
+                    var price: Double,
+                    var cost: Double,
+                    var qty: Int,
+                    var vendor: String? = null,
+                    var description: String? = null,
+                    var shelf: String? = null,
+                    var upc: String? = null,
+                    var selected: Boolean? = null
+) : Parcelable
 
 class ItemViewModel(private val repository: ItemRepository) : ViewModel() {
 

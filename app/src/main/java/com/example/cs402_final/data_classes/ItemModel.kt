@@ -21,20 +21,20 @@ import kotlinx.parcelize.Parcelize
 //This should be expanded to hold all of the data we need to display an item, either on search or on
 //the add/edit item screen
 
-@DatabaseView("SELECT * FROM items")
-@Parcelize
-data class ItemData(var id: Int,
-                    var code: String,
-                    var name: String,
-                    var price: Double,
-                    var cost: Double,
-                    var qty: Int,
-                    var vendor: String? = null,
-                    var description: String? = null,
-                    var shelf: String? = null,
-                    var upc: String? = null,
-                    var selected: Boolean? = null
-) : Parcelable
+//@DatabaseView("SELECT * FROM items")
+//@Parcelize
+//data class ItemData(var id: Int,
+//                    var code: String,
+//                    var name: String,
+//                    var price: Double,
+//                    var cost: Double,
+//                    var qty: Int,
+//                    var vendor: String? = null,
+//                    var description: String? = null,
+//                    var shelf: String? = null,
+//                    var upc: String? = null,
+//                    var selected: Boolean? = null
+//) : Parcelable
 
 class ItemModel(application: Application): AndroidViewModel(application) {
 

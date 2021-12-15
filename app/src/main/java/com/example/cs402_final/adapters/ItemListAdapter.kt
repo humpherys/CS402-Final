@@ -1,25 +1,15 @@
-package com.example.cs402_final
+package com.example.cs402_final.adapters
 
-import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ListAdapter
-import android.widget.ScrollView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.cs402_final.R
 import com.example.cs402_final.activities.ItemActivity
-import com.example.cs402_final.adapters.SearchAdapter
-import com.example.cs402_final.adapters.SearchListAdapter
 import com.example.cs402_final.data_classes.Item
-import com.example.cs402_final.data_classes.ItemViewModel
-import org.w3c.dom.Text
 
 
 class ItemListAdapter: RecyclerView.Adapter<ItemListAdapter.ItemViewHolder>() {
@@ -37,7 +27,6 @@ class ItemListAdapter: RecyclerView.Adapter<ItemListAdapter.ItemViewHolder>() {
 
         holder.apply {
             itemItemViewName.text = current.itemName
-
             itemItemViewName.setOnClickListener {
                 val addIntent = Intent(itemView.context, ItemActivity::class.java)
 //              addIntent.putExtra("item", item)
@@ -46,7 +35,7 @@ class ItemListAdapter: RecyclerView.Adapter<ItemListAdapter.ItemViewHolder>() {
             }
         }
 
-            // Below is for custom row Item
+            // TODO Below is for custom row Item
 
 //            itemViewItemID.text = current.itemId.toString()
 //            itemViewItemQty.text = current.itemQty.toString()
@@ -63,12 +52,11 @@ class ItemListAdapter: RecyclerView.Adapter<ItemListAdapter.ItemViewHolder>() {
     class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val itemItemViewName: TextView = itemView.findViewById(R.id.item_name)
 
-        // This is for custom_row_item
+        // TODO This is for custom_row_item if we decide to use that
 //        val itemViewButton: Button = itemView.findViewById(R.id.view_but)
 //        val itemViewItemID: TextView = itemView.findViewById(R.id.id_txt)
 //        val itemViewItemQty: TextView = itemView.findViewById(R.id.item_qty)
 
-        //val itemNameText: TextView = itemView.findViewById(R.id.item_name)
 
         fun bind(text: String?) {
             itemItemViewName.text = text

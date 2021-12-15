@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cs402_final.ItemData
+import com.example.cs402_final.data_classes.ItemData
 import com.example.cs402_final.R
 
 class UpdateAdapter(context: Context, var results: ArrayList<ItemData>)

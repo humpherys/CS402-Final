@@ -9,15 +9,10 @@ import androidx.activity.viewModels
 import androidx.core.os.bundleOf
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.cs402_final.ItemData
-import com.example.cs402_final.ItemListAdapter
+//import com.example.cs402_final.ItemData
 import com.example.cs402_final.R
 import com.example.cs402_final.adapters.TagData
-import com.example.cs402_final.data_classes.Item
+import com.example.cs402_final.data_classes.ItemData
 import com.example.cs402_final.data_classes.ItemViewModel
 import com.example.cs402_final.data_classes.ItemViewModelFactory
 import com.example.cs402_final.data_classes.ItemsApplication

@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cs402_final.ItemData
+//import com.example.cs402_final.ItemData
 import com.example.cs402_final.R
 import com.example.cs402_final.adapters.TagAdapter
 import com.example.cs402_final.adapters.TagData

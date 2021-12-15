@@ -12,18 +12,17 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.flow.Flow
 
 import com.example.cs402_final.activities.ItemActivity
-import com.example.cs402_final.ItemData
+import com.example.cs402_final.data_classes.ItemData
 import com.example.cs402_final.R
 import com.example.cs402_final.data_classes.Item
 
 public class SearchAdapter(context: Context, var results: ArrayList<ItemData>)
     : RecyclerView.Adapter<SearchAdapter.ResultsHolder>() {
 
-    //    private var itemList = emptyList<Item>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
             : ResultsHolder {
-        val view = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_item_view, parent, false)
+        val view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_search_item, parent, false)
 
         return ResultsHolder(view)
     }
@@ -31,7 +30,6 @@ public class SearchAdapter(context: Context, var results: ArrayList<ItemData>)
     override fun getItemCount() = results.size
 
     override fun onBindViewHolder(holder: ResultsHolder, position: Int) {
-        // val item = itemList[position]
         val item = results[position]
 
         holder.apply {
@@ -47,10 +45,5 @@ public class SearchAdapter(context: Context, var results: ArrayList<ItemData>)
 
     class ResultsHolder(view: View) : RecyclerView.ViewHolder(view) {
         val titleTextView: TextView = view.findViewById(R.id.item_name)
-    }
-//
-    fun setData(item: ArrayList<ItemData>){
-        this.results = item
-        notifyDataSetChanged()
     }
 }
