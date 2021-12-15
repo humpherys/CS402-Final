@@ -37,26 +37,36 @@ class ItemListAdapter: RecyclerView.Adapter<ItemListAdapter.ItemViewHolder>() {
 
         holder.apply {
             itemItemViewName.text = current.itemName
-            itemViewItemID.text = current.itemId.toString()
-            itemViewItemQty.text = current.itemQty.toString()
-            itemViewButton.setOnClickListener {
+
+            itemItemViewName.setOnClickListener {
                 val addIntent = Intent(itemView.context, ItemActivity::class.java)
-//                addIntent.putExtra("item", item)
+//              addIntent.putExtra("item", item)
                 addIntent.putExtra("origin", "search")
                 ContextCompat.startActivity(itemView.context, addIntent, null)
             }
         }
 
+            // Below is for custom row Item
 
+//            itemViewItemID.text = current.itemId.toString()
+//            itemViewItemQty.text = current.itemQty.toString()
+//            itemViewButton.setOnClickListener {
+//                val addIntent = Intent(itemView.context, ItemActivity::class.java)
+////                addIntent.putExtra("item", item)
+//                addIntent.putExtra("origin", "search")
+//                ContextCompat.startActivity(itemView.context, addIntent, null)
+//            }
 
         //holder.bind(current.toString())
     }
 
     class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val itemItemViewName: TextView = itemView.findViewById(R.id.name)
-        val itemViewButton: Button = itemView.findViewById(R.id.view_but)
-        val itemViewItemID: TextView = itemView.findViewById(R.id.id_txt)
-        val itemViewItemQty: TextView = itemView.findViewById(R.id.item_qty)
+        val itemItemViewName: TextView = itemView.findViewById(R.id.item_name)
+
+        // This is for custom_row_item
+//        val itemViewButton: Button = itemView.findViewById(R.id.view_but)
+//        val itemViewItemID: TextView = itemView.findViewById(R.id.id_txt)
+//        val itemViewItemQty: TextView = itemView.findViewById(R.id.item_qty)
 
         //val itemNameText: TextView = itemView.findViewById(R.id.item_name)
 
@@ -71,12 +81,12 @@ class ItemListAdapter: RecyclerView.Adapter<ItemListAdapter.ItemViewHolder>() {
         }
 
         companion object {
-            fun create(parent: ViewGroup) : ItemViewHolder {
-                val view : View = LayoutInflater.from(parent.context).inflate(R.layout.custom_row_item, parent, false)
+            fun create(parent: ViewGroup): ItemViewHolder {
+                val view: View = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.view_search_item, parent, false)
                 return ItemViewHolder(view)
             }
         }
-
     }
 
     override fun getItemCount(): Int {

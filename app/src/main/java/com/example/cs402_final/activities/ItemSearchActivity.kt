@@ -93,7 +93,7 @@ class ItemSearchActivity : AppCompatActivity() {
         }
 
         // TODO: May use this later
-//        var resultListItem = arrayListOf<Item>(
+//        var resultList = arrayListOf<Item>(
 //            Item(0, "abc","Test Item 1", 9.99,5.00,20,"", "", "", ""),
 //            Item(0, "abc","Test Item 2", 9.99,5.00,20,"", "", "", ""),
 //            Item(0, "abc","Test Item 3", 9.99,5.00,20, "", "", "", ""),
