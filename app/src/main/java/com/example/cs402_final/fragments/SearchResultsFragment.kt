@@ -11,17 +11,17 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-//import com.example.cs402_final.ItemData
 import com.example.cs402_final.R
 import com.example.cs402_final.adapters.ItemListAdapter
 import com.example.cs402_final.adapters.SearchAdapter
+import com.example.cs402_final.adapters.UpdateAdapter
 import com.example.cs402_final.data_classes.Item
 import com.example.cs402_final.data_classes.ItemData
 import com.example.cs402_final.data_classes.ItemViewModel
 
-// TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_FRAG = "fragType"
+private const val ARG_RESULTS = "results"
 
 /**
  * A simple [Fragment] subclass.
@@ -45,7 +45,7 @@ class SearchResults : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             fragType = it.getString(ARG_FRAG)
-            resultList = it.getParcelableArrayList<ItemData>("results") as ArrayList<ItemData>
+            resultList = it.getParcelableArrayList<ItemData>(ARG_RESULTS) as ArrayList<ItemData>
         } ?: run {
             resultList = ArrayList<ItemData>()
         }
@@ -75,7 +75,7 @@ class SearchResults : Fragment() {
 //            searchRecyclerView.adapter = adapter
 //            searchRecyclerView.layoutManager = LinearLayoutManager(this.context)
 //
-            this.context.let {
+        this.context.let {
                 // Jacob Below
                 // TODO DB
 
@@ -94,10 +94,10 @@ class SearchResults : Fragment() {
                 val searchAdapter = SearchAdapter(it!!, resultList)
 
                 searchRecyclerView.adapter = searchAdapter
-
+            } else if(fragType.equals("update") || fragType.equals("tagManage")) {
+                val updateAdapter: UpdateAdapter = UpdateAdapter(it!!, resultList)
+                searchRecyclerView.adapter = updateAdapter
             }
-        } else if(fragType.equals("update")) {
-            //TODO: init recyclerview for updating quantities
 
         }
     }
@@ -117,6 +117,7 @@ class SearchResults : Fragment() {
             SearchResults().apply {
                 arguments = Bundle().apply {
                     putString(ARG_FRAG, fragType)
+                    putParcelableArrayList(ARG_FRAG, resultList)
                 }
             }
     }

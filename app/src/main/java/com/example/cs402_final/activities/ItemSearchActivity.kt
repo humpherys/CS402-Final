@@ -13,17 +13,10 @@ import androidx.fragment.app.commit
 import androidx.recyclerview.widget.RecyclerView
 //import com.example.cs402_final.ItemData
 import com.example.cs402_final.R
-import com.example.cs402_final.adapters.ItemListAdapter
-import com.example.cs402_final.adapters.TagData
-import com.example.cs402_final.data_classes.ItemData
-import com.example.cs402_final.data_classes.ItemViewModel
-import com.example.cs402_final.data_classes.ItemViewModelFactory
-import com.example.cs402_final.data_classes.ItemsApplication
 import com.example.cs402_final.fragments.SearchResults
 import com.google.android.material.textfield.TextInputEditText
 
 class ItemSearchActivity : AppCompatActivity() {
-
 
     var action : String? = null
     var managingTag : TagData? = null
@@ -113,7 +106,7 @@ class ItemSearchActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             supportFragmentManager.commit {
                 val bundle = bundleOf(
-                    "fragType" to "search",
+                    "fragType" to (action ?: "search"),
                     "results" to resultList
                 )
                 setReorderingAllowed(true)
