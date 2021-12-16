@@ -5,11 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 //import com.example.cs402_final.ItemData
 import com.example.cs402_final.R
+import com.example.cs402_final.adapters.ItemListAdapter
 import com.example.cs402_final.adapters.SearchAdapter
 import com.example.cs402_final.data_classes.Item
 import com.example.cs402_final.data_classes.ItemData
@@ -29,12 +33,13 @@ class SearchResults : Fragment() {
     private var fragType: String? = null
 
 
-    private lateinit var searchRecyclerView: RecyclerView
+    lateinit var searchRecyclerView: RecyclerView
     private lateinit var resultList : ArrayList<ItemData>
     lateinit var res : LiveData<List<Item>>
 
     // add our ItemViewModel
-    private lateinit var mItemViewModel: ItemViewModel
+    private val mItemViewModel: ItemViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,36 +65,32 @@ class SearchResults : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 //        searchRecyclerView = view.findViewById(R.id.search_recycler_view)
 //        searchRecyclerView.layoutManager = LinearLayoutManager(this.context)
-        // Mason below
-        //TODO: This needs to be removed once we get the db working
 
 
         if(fragType.equals("search")) {
             searchRecyclerView = view.findViewById(R.id.search_recycler_view)
             searchRecyclerView.layoutManager = LinearLayoutManager(this.context)
-
-            // TODO For DB
-            // val adapter = ItemListAdapter()
-
+            // TODO DB
+//            val adapter = ItemListAdapter()
+//            searchRecyclerView.adapter = adapter
+//            searchRecyclerView.layoutManager = LinearLayoutManager(this.context)
 //
             this.context.let {
                 // Jacob Below
                 // TODO DB
-                // Get our list of items from DB
-                //res = mItemModel.allItems
 
-
-                // Create new adapter to put items into
-                // Sending in res, which is live data is going to cause an error with getItemCount function
-//                val itemListAdapter = ItemListAdapter(it!!, res)
-//                searchRecyclerView.adapter = itemListAdapter
-//                mItemModel = ViewModelProvider(this).get(ItemViewModel::class.java)
+//                searchRecyclerView.apply {
 //
-//                res.observe(viewLifecycleOwner, Observer { itemOb ->
-//                    itemListAdapter.setData(itemOb)
-//                })
+//                }
+//
+//                mItemViewModel.allItems.observe(this)
+//
+//                // Create new adapter to put DB items into
+//                // TODO Use this for DB
+//                val adapter = ItemListAdapter()
+//                searchRecyclerView.adapter = adapter
 
-
+                // TODO Use this for ArrayList of ItemData
                 val searchAdapter = SearchAdapter(it!!, resultList)
 
                 searchRecyclerView.adapter = searchAdapter

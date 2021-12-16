@@ -58,15 +58,15 @@ class ItemListAdapter: RecyclerView.Adapter<ItemListAdapter.ItemViewHolder>() {
 //        val itemViewItemQty: TextView = itemView.findViewById(R.id.item_qty)
 
 
-        fun bind(text: String?) {
-            itemItemViewName.text = text
-            itemItemViewName.setOnClickListener {
-                val addIntent = Intent(itemView.context, ItemActivity::class.java)
-//                addIntent.putExtra("item", item)
-                addIntent.putExtra("origin", "search")
-                ContextCompat.startActivity(itemView.context, addIntent, null)
-            }
-        }
+//        fun bind(text: String?) {
+//            itemItemViewName.text = text
+//            itemItemViewName.setOnClickListener {
+//                val addIntent = Intent(itemView.context, ItemActivity::class.java)
+////                addIntent.putExtra("item", item)
+//                addIntent.putExtra("origin", "search")
+//                ContextCompat.startActivity(itemView.context, addIntent, null)
+//            }
+//        }
 
         companion object {
             fun create(parent: ViewGroup): ItemViewHolder {

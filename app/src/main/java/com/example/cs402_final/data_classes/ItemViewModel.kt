@@ -31,6 +31,7 @@ class ItemViewModel(private val repository: ItemRepository) : ViewModel() {
     //   the UI when the data actually changes.
     // - Repository is completely separated from the UI through the ViewModel.
 
+
     var allItems = repository.readAllItems().asLiveData()
 
     fun getItemName(itemName: String) {

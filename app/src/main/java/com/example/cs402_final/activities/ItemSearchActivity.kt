@@ -7,10 +7,13 @@ import android.view.View
 import android.widget.Button
 import androidx.activity.viewModels
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
+import androidx.recyclerview.widget.RecyclerView
 //import com.example.cs402_final.ItemData
 import com.example.cs402_final.R
+import com.example.cs402_final.adapters.ItemListAdapter
 import com.example.cs402_final.adapters.TagData
 import com.example.cs402_final.data_classes.ItemData
 import com.example.cs402_final.data_classes.ItemViewModel
@@ -25,13 +28,18 @@ class ItemSearchActivity : AppCompatActivity() {
     var action : String? = null
     var managingTag : TagData? = null
     private val itemActivityRequestCode = 1
+
     private val itemViewModel: ItemViewModel by viewModels {
         ItemViewModelFactory((application as ItemsApplication).repository)
     }
 
+    private val listAdapter: ItemListAdapter by lazy {ItemListAdapter()}
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_search)
+
+
 
         // TODO DB
         // We have a fragment, not a recyclerview
