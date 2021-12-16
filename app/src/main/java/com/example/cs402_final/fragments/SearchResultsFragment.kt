@@ -63,43 +63,39 @@ class SearchResults : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        searchRecyclerView = view.findViewById(R.id.search_recycler_view)
-//        searchRecyclerView.layoutManager = LinearLayoutManager(this.context)
+        searchRecyclerView = view.findViewById(R.id.search_recycler_view)
+        searchRecyclerView.layoutManager = LinearLayoutManager(this.context)
 
-
-        if(fragType.equals("search")) {
-            searchRecyclerView = view.findViewById(R.id.search_recycler_view)
-            searchRecyclerView.layoutManager = LinearLayoutManager(this.context)
-            // TODO DB
-//            val adapter = ItemListAdapter()
-//            searchRecyclerView.adapter = adapter
-//            searchRecyclerView.layoutManager = LinearLayoutManager(this.context)
-//
-        this.context.let {
+            this.context.let {
                 // Jacob Below
                 // TODO DB
+    //            val adapter = ItemListAdapter()
+    //            searchRecyclerView.adapter = adapter
+    //            searchRecyclerView.layoutManager = LinearLayoutManager(this.context)
 
-//                searchRecyclerView.apply {
-//
-//                }
-//
-//                mItemViewModel.allItems.observe(this)
-//
-//                // Create new adapter to put DB items into
-//                // TODO Use this for DB
-//                val adapter = ItemListAdapter()
-//                searchRecyclerView.adapter = adapter
+                if(fragType.equals("search")) {
+                    // TODO DB
+                    // TODO Use this for ArrayList of ItemData
+                    val searchAdapter = SearchAdapter(it!!, resultList)
 
-                // TODO Use this for ArrayList of ItemData
-                val searchAdapter = SearchAdapter(it!!, resultList)
+                    searchRecyclerView.adapter = searchAdapter
 
-                searchRecyclerView.adapter = searchAdapter
-            } else if(fragType.equals("update") || fragType.equals("tagManage")) {
-                val updateAdapter: UpdateAdapter = UpdateAdapter(it!!, resultList)
-                searchRecyclerView.adapter = updateAdapter
+//                    searchRecyclerView.apply {
+//                        mItemViewModel.allItems.observe(this)
+//
+//                        // Create new adapter to put DB items into
+//                        // TODO Use this for DB
+//                        val adapter = ItemListAdapter()
+//                        searchRecyclerView.adapter = adapter
+//                    }
+
+
+                } else if(fragType.equals("update") || fragType.equals("tagManage")) {
+                    val updateAdapter: UpdateAdapter = UpdateAdapter(it!!, resultList)
+                    searchRecyclerView.adapter = updateAdapter
+                }
             }
 
-        }
     }
 
     companion object {
