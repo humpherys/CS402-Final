@@ -4,9 +4,14 @@ import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import androidx.activity.viewModels
 import androidx.core.widget.doOnTextChanged
-import com.example.cs402_final.ItemData
+import com.example.cs402_final.data_classes.ItemData
 import com.example.cs402_final.R
+import com.example.cs402_final.data_classes.Item
+import com.example.cs402_final.data_classes.ItemViewModel
+import com.example.cs402_final.data_classes.ItemViewModelFactory
+import com.example.cs402_final.data_classes.ItemsApplication
 import com.google.android.material.textfield.TextInputEditText
 
 
@@ -14,6 +19,7 @@ class ItemActivity : AppCompatActivity() {
 
     private var displayedItem: ItemData? = null
     private lateinit var startedFrom: String
+    private var displayedDBItem: Item? = null
 
     private var newName: String? = null
     private var newDescription: String? = null
@@ -28,6 +34,11 @@ class ItemActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item)
+
+        val itemViewModel: ItemViewModel by viewModels {
+            ItemViewModelFactory((application as ItemsApplication).repository)
+        }
+
         val extras = intent.extras
         startedFrom = extras?.getString("origin") ?: ""
 
@@ -119,13 +130,120 @@ class ItemActivity : AppCompatActivity() {
             }
         }
 
+        // ------------------------------- Masons Above, Jacob Below, Jacob is for DB
+
+        itemNameContainer.doOnTextChanged { text, start, before, count ->
+            displayedDBItem?.let {
+                it.itemName = text.toString()
+            } ?: run {
+                newName = text.toString()
+            }
+        }
+
+        itemDescription.doOnTextChanged { text, start, before, count ->
+            displayedDBItem?.let {
+                it.itemDesc = text.toString()
+            } ?: run {
+                newDescription = text.toString()
+            }
+        }
+
+        itemCode.doOnTextChanged { text, start, before, count ->
+            displayedDBItem?.let {
+                it.itemCode = text.toString()
+            } ?: run {
+                newCode = text.toString()
+            }
+        }
+
+        itemPrice.doOnTextChanged { text, start, before, count ->
+            displayedDBItem?.let {
+                val parsedPrice = String.format("%.2f", text.toString().toDouble())
+                it.itemPrice = parsedPrice.toDouble()
+            } ?: run {
+                val parsedPrice = String.format("%.2f", text.toString().toDouble())
+                newPrice = parsedPrice.toDouble()
+            }
+        }
+
+        itemCost.doOnTextChanged { text, start, before, count ->
+            displayedDBItem?.let {
+                val parsedPrice = String.format("%.2f", text.toString().toDouble())
+                it.itemCost = parsedPrice.toDouble()
+            } ?: run {
+                val parsedPrice = String.format("%.2f", text.toString().toDouble())
+                newCost = parsedPrice.toDouble()
+            }
+        }
+
+        itemQuantity.doOnTextChanged { text, start, before, count ->
+            displayedDBItem?.let {
+                it.itemQty = text.toString().toInt()
+            } ?: run {
+                newQuantity = text.toString().toInt()
+            }
+        }
+
+        itemVendor.doOnTextChanged { text, start, before, count ->
+            displayedDBItem?.let {
+                it.itemVendorCode = text.toString()
+            } ?: run {
+                newVendor = text.toString()
+            }
+        }
+
+        itemShelf.doOnTextChanged { text, start, before, count ->
+            displayedDBItem?.let {
+                it.itemLoc = text.toString()
+            } ?: run {
+                newShelf = text.toString()
+            }
+        }
+
+        itemUPC.doOnTextChanged { text, start, before, count ->
+            displayedDBItem?.let {
+                it.itemUPC = text.toString()
+            } ?: run {
+                newUPC = text.toString()
+            }
+        }
+
         saveButton.setOnClickListener {
             if(startedFrom.equals("search")) {
                 //TODO: do something here to save data from the existing item to storage
-                //TODO: Also need to figure out how to properly update the search list on return
+                //TODO: Also need to figure out how to properly update the search list on return, Room should do this for us
                     //or maybe just clear the search?
+
+                var id = 0
+                var newItem = ItemData(id,
+                    newCode!!,
+                    newName!!,
+                    newPrice,
+                    newCost,
+                    newQuantity,
+                    newVendor,
+                    newDescription,
+                    newShelf,
+                    newUPC)
+
+                var newItem1 = Item(id,
+                    newCode!!,
+                    newName!!,
+                    newPrice,
+                    newCost,
+                    newQuantity,
+                    newVendor,
+                    newDescription,
+                    newShelf,
+                    newUPC)
+
+                // Write updateItem function and uncomment line below for updating
+                // itemViewModel.updateItem(newItem1)
+
+
                 finish()
             } else if(startedFrom.equals("main") || startedFrom.equals("")) {
+                // we cam from the new item button
                 if(newCode == null || newName == null) {
                     val builder = AlertDialog.Builder(this)
                     builder.setTitle("Cannot save!")
@@ -147,9 +265,24 @@ class ItemActivity : AppCompatActivity() {
                         newShelf,
                         newUPC)
 
+                    var newItem1 = Item(id,
+                        newCode!!,
+                        newName!!,
+                        newPrice,
+                        newCost,
+                        newQuantity,
+                        newVendor,
+                        newDescription,
+                        newShelf,
+                        newUPC)
+
                     //TODO: do something to save the new item to storage
+
+                    // Insert new item
+                    itemViewModel.insert(newItem1)
                     finish()
                 }
+                // check to see if it was added?
             }
         }
 

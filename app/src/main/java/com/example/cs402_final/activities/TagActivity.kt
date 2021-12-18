@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
-import com.example.cs402_final.ItemData
+//import com.example.cs402_final.ItemData
 import com.example.cs402_final.R
 import com.example.cs402_final.adapters.TagData
 import com.example.cs402_final.fragments.SearchResults

@@ -6,7 +6,7 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cs402_final.ItemData
+import com.example.cs402_final.data_classes.ItemData
 import com.example.cs402_final.R
 import com.example.cs402_final.adapters.QuantityAdapter
 

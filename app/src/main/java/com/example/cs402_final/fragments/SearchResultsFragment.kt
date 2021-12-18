@@ -5,13 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cs402_final.ItemData
-import com.example.cs402_final.ItemModel
 import com.example.cs402_final.R
+import com.example.cs402_final.adapters.ItemListAdapter
 import com.example.cs402_final.adapters.SearchAdapter
 import com.example.cs402_final.adapters.UpdateAdapter
+import com.example.cs402_final.data_classes.Item
+import com.example.cs402_final.data_classes.ItemData
+import com.example.cs402_final.data_classes.ItemViewModel
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_FRAG = "fragType"
@@ -27,11 +33,13 @@ class SearchResults : Fragment() {
     private var fragType: String? = null
 
 
-    private lateinit var searchRecyclerView: RecyclerView
-    private lateinit var resultList: ArrayList<ItemData>
+    lateinit var searchRecyclerView: RecyclerView
+    private lateinit var resultList : ArrayList<ItemData>
+    lateinit var res : LiveData<List<Item>>
 
-    // add our ItemModel
-    private lateinit var mItemModel: ItemModel
+    // add our ItemViewModel
+    private val mItemViewModel: ItemViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +49,6 @@ class SearchResults : Fragment() {
         } ?: run {
             resultList = ArrayList<ItemData>()
         }
-
     }
 
     override fun onCreateView(
@@ -49,38 +56,45 @@ class SearchResults : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        //val view = inflater.inflate(R.layout.fragment_search_results, container, false)
+        // return inflater.inflate(R.layout.fragment_search_results, container, false)
 
-
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_search_results, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-        searchRecyclerView = view.findViewById<RecyclerView>(R.id.search_recycler_view)
+        searchRecyclerView = view.findViewById(R.id.search_recycler_view)
         searchRecyclerView.layoutManager = LinearLayoutManager(this.context)
+
+            this.context.let {
+                // Jacob Below
+                // TODO DB
+    //            val adapter = ItemListAdapter()
+    //            searchRecyclerView.adapter = adapter
+    //            searchRecyclerView.layoutManager = LinearLayoutManager(this.context)
+
+                if(fragType.equals("search")) {
+                    // TODO DB
+                    // TODO Use this for ArrayList of ItemData
+                    val searchAdapter = SearchAdapter(it!!, resultList)
+
+                    searchRecyclerView.adapter = searchAdapter
+
+//                    searchRecyclerView.apply {
+//                        mItemViewModel.allItems.observe(this)
 //
-        this.context.let {
-//            val searchAdapter: SearchAdapter = SearchAdapter()
-            //resultList = emptyList()
-            if(fragType.equals("search")) {
-                val searchAdapter: SearchAdapter = SearchAdapter(it!!, resultList)
-                searchRecyclerView.adapter = searchAdapter
-            } else if(fragType.equals("update") || fragType.equals("tagManage")) {
-                val updateAdapter: UpdateAdapter = UpdateAdapter(it!!, resultList)
-                searchRecyclerView.adapter = updateAdapter
+//                        // Create new adapter to put DB items into
+//                        // TODO Use this for DB
+//                        val adapter = ItemListAdapter()
+//                        searchRecyclerView.adapter = adapter
+//                    }
+
+
+                } else if(fragType.equals("update") || fragType.equals("tagManage")) {
+                    val updateAdapter: UpdateAdapter = UpdateAdapter(it!!, resultList)
+                    searchRecyclerView.adapter = updateAdapter
+                }
             }
-
-            // Set up item model
-//            mItemModel = ViewModelProvider(this).get(ItemModel::class.java)
-//            mItemModel.readAllData.observe(this, Observer { item ->
-//                searchAdapter.setData(item)
-//            })
-        }
-
 
     }
 
